@@ -53,7 +53,6 @@ if utils.is_available "alpha-nvim" then
     end,
   })
 end
-  
 augroup("dashboard_settings", {})
 
     cmd("FileType", {

@@ -63,7 +63,7 @@ map("n", "<C-s>", "<cmd>w!<CR>", { desc = "Force write" })
 map("n", "<C-q>", "<cmd>q!<CR>", { desc = "Force quit" })
 
 -- Terminal
-  map("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 
 -- disable Ex mode:
 map("n", "Q", "<Nop>")
@@ -91,7 +91,7 @@ if not utils.is_available "which-key.nvim" then
   map("n", "<leader>pu", "<cmd>PackerUpdate<cr>", { desc = "Packer update" })
 
   -- LSP
-  map("n", "<leader>lf", vim.lsp.buf.formatting_sync, { desc = "Format code" })
+  map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format code" })
   map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP information" })
   map("n", "<leader>lI", "<cmd>LspInstallInfo<cr>", { desc = "LSP installer" })
   map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action" })

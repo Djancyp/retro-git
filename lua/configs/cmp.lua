@@ -1,68 +1,22 @@
 local M = {}
 
 function M.config()
+  -- Setup lspconfig.
+  vim.opt.completeopt = "menu,menuone,noselect"
   local cmp_status_ok, cmp = pcall(require, "cmp")
   local snip_status_ok, luasnip = pcall(require, "luasnip")
   if cmp_status_ok and snip_status_ok then
-    local kind_icons = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "ﰠ",
-      Variable = "",
-      Class = "",
-      Interface = "",
-      Module = "",
-      Property = "",
-      Unit = "",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "פּ",
-      Event = "",
-      Operator = "",
-      TypeParameter = "",
-    }
-
-    cmp.setup(require("core.utils").user_plugin_opts("plugins.cmp", {
-      preselect = cmp.PreselectMode.None,
-      formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(_, vim_item)
-          vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-          return vim_item
-        end,
-      },
+    cmp.setup({
       snippet = {
         expand = function(args)
-          luasnip.lsp_expand(args.body)
+          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
-      duplicates = {
-        nvim_lsp = 1,
-        luasnip = 1,
-        cmp_tabnine = 1,
-        buffer = 1,
-        path = 1,
-      },
-      confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-      },
       window = {
-        documentation = {
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
       },
-      mapping = {
+      mapping = cmp.mapping.preset.insert({
         ["<Up>"] = cmp.mapping.select_prev_item(),
         ["<Down>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -104,9 +58,27 @@ function M.config()
           "i",
           "s",
         }),
-      },
-    }))
+      }),
+
+      sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        -- { name = 'vsnip' }, -- For vsnip users.
+        { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+      }, {
+        { name = 'buffer' },
+      })
+    })
   end
 end
 
+-- local capabilities = vim.lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require('lspconfig')['tsserver'].setup {
+  -- capabilities = capabilities
+-- }
+
 return M
+

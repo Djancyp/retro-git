@@ -134,6 +134,14 @@ if packer_status_ok then
         require("telescope").load_extension(vim.fn.has "win32" == 1 and "fzy_native" or "fzf")
       end,
     },
+    -- Smooth scrolling
+    {
+      "karb94/neoscroll.nvim",
+      event = { "BufRead", "BufNewFile" },
+      config = function()
+        require("configs.neoscroll").config()
+      end,
+    },
     -- Statusline
     {
       "nvim-lualine/lualine.nvim",
@@ -142,38 +150,6 @@ if packer_status_ok then
       end,
     },
 
-     -- Snippet collection
-    {
-      "rafamadriz/friendly-snippets",
-      after = "nvim-cmp",
-    },
-
-    -- Snippet engine
-    {
-      "L3MON4D3/LuaSnip",
-      after = "friendly-snippets",
-      config = function()
-        require("configs.luasnip").config()
-      end,
-    },
-
-    -- Completion engine
-    {
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      config = function()
-        require("configs.cmp").config()
-      end,
-    },
-
-    -- Snippet completion source
-    {
-      "saadparwaiz1/cmp_luasnip",
-      after = "nvim-cmp",
-      config = function()
-        require("core.utils").add_user_cmp_source "luasnip"
-      end,
-    },
     -- Built-in LSP
     {
       "neovim/nvim-lspconfig",
@@ -206,10 +182,52 @@ if packer_status_ok then
       end,
     },
 
+
+         -- Snippet collection
+    {
+      "rafamadriz/friendly-snippets",
+      after = "nvim-cmp",
+    },
+
+    -- Snippet engine
+    {
+      "L3MON4D3/LuaSnip",
+      after = "friendly-snippets",
+      config = function()
+        require("configs.luasnip").config()
+      end,
+    },
+
+
+    {
+     "hrsh7th/cmp-nvim-lsp",
+      config = function()
+        -- require("configs.cmp-lsp").config()
+      end,
+   },
+    -- Snippet completion source
+    {
+      "saadparwaiz1/cmp_luasnip",
+      after = "nvim-cmp",
+      config = function()
+        require("core.utils").add_user_cmp_source "luasnip"
+      end,
+    },
+        -- Completion engine
+    {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      config = function()
+        require("configs.cmp").config()
+      end,
+    },
+
+
     -- Terminal
     {
       "akinsho/nvim-toggleterm.lua",
-      cmd = "ToggleTerm",
+      cmd = "ToggleTerm", 
+      module = { "toggleterm", "toggleterm.terminal" },
       config = function()
         require("configs.toggleterm").config()
       end,
@@ -222,6 +240,15 @@ if packer_status_ok then
         require("configs.which-key").config()
       end,
     },
+    -- Completion engine
+    {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      config = function()
+        require("configs.cmp").config()
+      end,
+    },
+
     -- Buffer completion source
     {
       "hrsh7th/cmp-buffer",

@@ -3,7 +3,7 @@ local M = {}
 function M.config()
   local status_ok, toggleterm = pcall(require, "toggleterm")
   if status_ok then
-    toggleterm.setup(require("core.utils").user_plugin_opts("plugins.toggleterm", {
+    toggleterm.setup({
       size = 10,
       open_mapping = [[<c-~>]],
       hide_numbers = true,
@@ -24,7 +24,7 @@ function M.config()
           background = "Normal",
         },
       },
-    }))
+    })
   end
 end
 

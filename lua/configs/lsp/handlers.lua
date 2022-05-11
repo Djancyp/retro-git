@@ -34,7 +34,7 @@ function M.setup()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
@@ -51,7 +51,7 @@ end
 
 M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover symbol details", buffer = 0 })
-  vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting_sync, { desc = "Format code", buffer = 0 })
+  vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format code", buffer = 0 })
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action", buffer = 0 })
   vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename current symbol", buffer = 0 })
   vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Hover diagnostics", buffer = 0 })
@@ -63,7 +63,7 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, { desc = "Format file with LSP" })
 
   if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
-    client.resolved_capabilities.document_formatting = false
+    -- client.resolved_capabilities.document_formatting = false
   end
 
   local on_attach_override = require("core.utils").user_plugin_opts("lsp.on_attach", nil, false)
