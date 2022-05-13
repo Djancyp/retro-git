@@ -25,7 +25,7 @@ if status_ok then
           name = "LSP",
           a = { vim.lsp.buf.code_action, "Code Action" },
           d = { vim.diagnostic.open_float, "Hover Diagnostic" },
-          f = { vim.lsp.buf.formatting_sync, "Format" },
+          f = { vim.lsp.buf.format, "Format" },
           i = { "<cmd>LspInfo<cr>", "Info" },
           I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
           r = { vim.lsp.buf.rename, "Rename" },
