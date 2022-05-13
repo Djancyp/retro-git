@@ -182,6 +182,7 @@ if packer_status_ok then
       end,
     },
 
+    {"sar/cmp-lsp.nvim"},
 
          -- Snippet collection
     {

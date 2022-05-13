@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/djan/.local/share/nvim/site/pack/packer/opt/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-lsp.nvim"] = {
+    loaded = true,
+    path = "/home/djan/.local/share/nvim/site/pack/packer/start/cmp-lsp.nvim",
+    url = "https://github.com/sar/cmp-lsp.nvim"
+  },
   ["cmp-nvim-lsp"] = {
     config = { "\27LJ\2\2\v\0\0\1\0\0\0\1K\0\1\0\0" },
     loaded = true,
@@ -204,7 +209,7 @@ _G.packer_plugins = {
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp_luasnip", "friendly-snippets", "cmp-path" },
+    after = { "friendly-snippets", "cmp-buffer", "cmp_luasnip", "cmp-path" },
     config = { "\27LJ\2\2:\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\16configs.cmp\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -226,7 +231,7 @@ _G.packer_plugins = {
       ["nvim-lspconfig"] = true
     },
     loaded = false,
-    needs_bufread = false,
+    needs_bufread = true,
     path = "/home/djan/.local/share/nvim/site/pack/packer/opt/nvim-lsp-installer",
     url = "https://github.com/williamboman/nvim-lsp-installer"
   },
@@ -254,7 +259,7 @@ _G.packer_plugins = {
     url = "https://github.com/akinsho/nvim-toggleterm.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "nvim-ts-context-commentstring", "nvim-ts-autotag", "nvim-ts-rainbow" },
+    after = { "nvim-ts-context-commentstring", "nvim-ts-rainbow", "nvim-ts-autotag" },
     commands = { "TSInstall", "TSInstallInfo", "TSInstallSync", "TSUninstall", "TSUpdate", "TSUpdateSync", "TSDisableAll", "TSEnableAll" },
     config = { "\27LJ\2\2A\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\23configs.treesitter\frequire\0" },
     loaded = false,
