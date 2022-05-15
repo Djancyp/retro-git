@@ -16,7 +16,7 @@ function M.config()
 
     telescope.setup(require("core.utils").user_plugin_opts("plugins.telescope", {
       defaults = {
-
+        file_ignore_patterns = { "node_modules","*.png","*.jpeg","*.jpg" },
         prompt_prefix = " ",
         selection_caret = "❯ ",
         path_display = { "truncate" },

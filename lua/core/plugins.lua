@@ -5,9 +5,9 @@ if packer_status_ok then
     {
       "wbthomason/packer.nvim",
     },
-    {"/home/djan/Desktop/lua/test_plugin.nvim"},
+    { "/home/djan/Desktop/lua/test_plugin.nvim" },
     -- gruvbox theme
-    {"morhetz/gruvbox"},
+    { "morhetz/gruvbox" },
     -- vimspector
     { "puremourning/vimspector" },
 
@@ -18,8 +18,8 @@ if packer_status_ok then
     { "nvim-lua/popup.nvim" },
 
     --git copilot
-    {"github/copilot.vim"},
-     -- Git integration
+    { "github/copilot.vim" },
+    -- Git integration
     {
       "lewis6991/gitsigns.nvim",
       opt = true,
@@ -42,13 +42,18 @@ if packer_status_ok then
       "p00f/nvim-ts-rainbow",
       after = "nvim-treesitter",
     },
-    -- Bufferline
+    -- -- Bufferline
     {
       "akinsho/bufferline.nvim",
       after = "nvim-web-devicons",
       config = function()
         require("configs.bufferline").config()
       end,
+    },
+    -- Parenthesis highlighting
+    {
+      "p00f/nvim-ts-rainbow",
+      after = "nvim-treesitter",
     },
 
     -- Autoclose tags
@@ -63,14 +68,14 @@ if packer_status_ok then
     },
 
     -- Commenting
-      {
-        "numToStr/Comment.nvim",
-        event = "InsertEnter",
-        config = function()
-          require("configs.Comment").config()
-        end,
-      },
-      -- Context based commenting
+    {
+      "numToStr/Comment.nvim",
+      event = "InsertEnter",
+      config = function()
+        require("configs.Comment").config()
+      end,
+    },
+    -- Context based commenting
     {
       "JoosepAlviste/nvim-ts-context-commentstring",
       after = "nvim-treesitter",
@@ -107,11 +112,11 @@ if packer_status_ok then
       "nvim-neo-tree/neo-tree.nvim",
       cmd = "Neotree",
       branch = "v2.x",
-      requires = { 
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    },
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+      },
       config = function()
         require("configs.neo-tree").config()
       end,
@@ -182,9 +187,9 @@ if packer_status_ok then
       end,
     },
 
-    {"sar/cmp-lsp.nvim"},
+    { "sar/cmp-lsp.nvim" },
 
-         -- Snippet collection
+    -- Snippet collection
     {
       "rafamadriz/friendly-snippets",
       after = "nvim-cmp",
@@ -201,11 +206,11 @@ if packer_status_ok then
 
 
     {
-     "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp",
       config = function()
         -- require("configs.cmp-lsp").config()
       end,
-   },
+    },
     -- Snippet completion source
     {
       "saadparwaiz1/cmp_luasnip",
@@ -214,7 +219,7 @@ if packer_status_ok then
         require("core.utils").add_user_cmp_source "luasnip"
       end,
     },
-        -- Completion engine
+    -- Completion engine
     {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -227,7 +232,7 @@ if packer_status_ok then
     -- Terminal
     {
       "akinsho/nvim-toggleterm.lua",
-      cmd = "ToggleTerm", 
+      cmd = "ToggleTerm",
       module = { "toggleterm", "toggleterm.terminal" },
       config = function()
         require("configs.toggleterm").config()
@@ -280,15 +285,13 @@ if packer_status_ok then
   packer.startup {
     function(use)
       -- Load plugins!
-      for _, plugin in
-        pairs(
-          require("core.utils").user_plugin_opts("plugins.init", require("core.utils").label_plugins(plugins))
-        )
-      do
+      for _, plugin in pairs(
+        require("core.utils").user_plugin_opts("plugins.init", require("core.utils").label_plugins(plugins))
+      ) do
         use(plugin)
       end
     end,
     auto_clean = true,
     compile_on_sync = true,
-}
+  }
 end
