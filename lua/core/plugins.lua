@@ -5,7 +5,6 @@ if packer_status_ok then
     {
       "wbthomason/packer.nvim",
     },
-    { "/home/djan/Desktop/lua/test_plugin.nvim" },
     -- gruvbox theme
     { "morhetz/gruvbox" },
     -- vimspector

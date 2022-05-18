@@ -9,6 +9,10 @@ local augroup = vim.api.nvim_create_augroup
 -- Remap space as leader key
 map("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
+-- set copilot to use Ctrl-L as leader key
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+map("i", "<C-l>","copilot#Accept()", {expr=true, silent=true})
 -- Normal --
 if utils.is_available "smart-splits.nvim" then
   -- Better window navigation
@@ -63,7 +67,7 @@ map("n", "<C-s>", "<cmd>w!<CR>", { desc = "Force write" })
 map("n", "<C-q>", "<cmd>q!<CR>", { desc = "Force quit" })
 
 -- Terminal
-map("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("n", "<C-\\>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 
 -- disable Ex mode:
 map("n", "Q", "<Nop>")
