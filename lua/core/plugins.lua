@@ -28,9 +28,6 @@ if packer_status_ok then
     { "dracula/vim" },
     -- Molokai theme
     { "tomasr/molokai" },
-    -- vimspector
-    { "puremourning/vimspector" },
-
     -- Lua functions
     { "nvim-lua/plenary.nvim" },
 
@@ -377,6 +374,34 @@ if packer_status_ok then
         require("configs.smart-splits").config()
       end,
     },
+    { "mfussenegger/nvim-dap",
+      config = function()
+        require("configs.dap").config()
+      end,
+    },
+    -- {
+    --   "rcarriga/nvim-dap-ui",
+    --   requires = { "nvim-dap" },
+    --   config = function()
+    --     require("configs.dap").ui_config()
+    --   end,
+    -- },
+    {
+      "uelei/DAPInstall.nvim",
+      config = function()
+        -- require("configs.dap").install_config()
+      end,
+    },
+    { "nvim-telescope/telescope-dap.nvim",
+      config = function()
+        require('telescope').load_extension('dap')
+      end,
+    },
+    { "theHamsta/nvim-dap-virtual-text",
+      config = function()
+         require('nvim-dap-virtual-text').setup()
+      end,
+    }
   }
 
   packer.startup {

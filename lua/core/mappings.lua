@@ -12,35 +12,35 @@ vim.g.mapleader = " "
 -- set copilot to use Ctrl-L as leader key
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
-map("i", "<C-l>","copilot#Accept()", {expr=true, silent=true})
+map("i", "<C-l>", "copilot#Accept()", { expr = true, silent = true })
 -- Normal --
-  -- Better window navigation
-  map("n", "<C-h>", function()
-    require("smart-splits").move_cursor_left()
-  end, { desc = "Move to left split" })
-  map("n", "<C-j>", function()
-    require("smart-splits").move_cursor_down()
-  end, { desc = "Move to below split" })
-  map("n", "<C-k>", function()
-    require("smart-splits").move_cursor_up()
-  end, { desc = "Move to above split" })
-  map("n", "<C-l>", function()
-    require("smart-splits").move_cursor_right()
-  end, { desc = "Move to right split" })
+-- Better window navigation
+map("n", "<C-h>", function()
+  require("smart-splits").move_cursor_left()
+end, { desc = "Move to left split" })
+map("n", "<C-j>", function()
+  require("smart-splits").move_cursor_down()
+end, { desc = "Move to below split" })
+map("n", "<C-k>", function()
+  require("smart-splits").move_cursor_up()
+end, { desc = "Move to above split" })
+map("n", "<C-l>", function()
+  require("smart-splits").move_cursor_right()
+end, { desc = "Move to right split" })
 
-  -- Resize with arrows
-  map("n", "<C-Up>", function()
-    require("smart-splits").resize_up()
-  end, { desc = "Resize split up" })
-  map("n", "<C-Down>", function()
-    require("smart-splits").resize_down()
-  end, { desc = "Resize split down" })
-  map("n", "<C-Left>", function()
-    require("smart-splits").resize_left()
-  end, { desc = "Resize split left" })
-  map("n", "<C-Right>", function()
-    require("smart-splits").resize_right()
-  end, { desc = "Resize split right" })
+-- Resize with arrows
+map("n", "<C-Up>", function()
+  require("smart-splits").resize_up()
+end, { desc = "Resize split up" })
+map("n", "<C-Down>", function()
+  require("smart-splits").resize_down()
+end, { desc = "Resize split down" })
+map("n", "<C-Left>", function()
+  require("smart-splits").resize_left()
+end, { desc = "Resize split left" })
+map("n", "<C-Right>", function()
+  require("smart-splits").resize_right()
+end, { desc = "Resize split right" })
 
 -- Navigate buffers
 if utils.is_available "bufferline.nvim" then
@@ -119,7 +119,7 @@ if not utils.is_available "which-key.nvim" then
 
   -- Dashboard
   if utils.is_available "dashboard-nvim" then
-    map("n", "<leader>d", "<cmd>Dashboard<CR>", { desc = "Dashboard" })
+    -- map("n", "<leader>d", "<cmd>Dashboard<CR>", { desc = "Dashboard" })
     map("n", "<leader>fn", "<cmd>DashboardNewFile<CR>", { desc = "New File" })
     map("n", "<leader>Sl", "<cmd>SessionLoad<CR>", { desc = "Load session" })
     map("n", "<leader>Ss", "<cmd>SessionSave<CR>", { desc = "Save session" })
@@ -278,7 +278,27 @@ if utils.is_available "Comment.nvim" then
     { desc = "Toggle comment line" }
   )
 end
-
+-- Debugger
+vim.keymap.set('n', '<leader>dh', function() require"dap".toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>dH', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+vim.keymap.set('n', '<leader>dkk', function() require"dap".step_out() end)
+vim.keymap.set('n', "<leader>dll", function() require"dap".step_into() end)
+vim.keymap.set('n', '<leader>djj', function() require"dap".step_over() end)
+vim.keymap.set('n', '<leader>dhh', function() require"dap".continue() end)
+vim.keymap.set('n', '<leader>dn', function() require"dap".run_to_cursor() end)
+vim.keymap.set('n', '<leader>dc', function() require"dap".terminate() end)
+vim.keymap.set('n', '<leader>dR', function() require"dap".clear_breakpoints() end)
+vim.keymap.set('n', '<leader>de', function() require"dap".set_exception_breakpoints({"all"}) end)
+vim.keymap.set('n', '<leader>da', function() require"configs.dap".attach() end)
+vim.keymap.set('n', '<leader>dA', function() require"configs.dap".attachToRemote() end)
+vim.keymap.set('n', '<leader>di', function() require"dap.ui.widgets".hover() end)
+vim.keymap.set('n', '<leader>d?', function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end)
+vim.keymap.set('n', '<leader>dk', ':lua require"dap".up()<CR>zz')
+vim.keymap.set('n', '<leader>dj', ':lua require"dap".down()<CR>zz')
+vim.keymap.set('n', '<leader>dr', ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l')
+vim.keymap.set('n', '<leader>ds', ':lua require"telescope".extensions.dap.frames{}<CR>')
+-- vim.keymap.set('n', '<leader>dc', ':Telescope dap commands<CR>')
+vim.keymap.set('n', '<leader>db', ':lua require"telescope".extensions.dap.list_breakpoints{}<CR>')
 function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], { desc = "Terminal normal mode" })
   vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], { desc = "Terminal normal mode" })
