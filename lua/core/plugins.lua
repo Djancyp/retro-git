@@ -5,8 +5,29 @@ if packer_status_ok then
     {
       "wbthomason/packer.nvim",
     },
+    {
+      "lewis6991/impatient.nvim",
+      config = function()
+        require('impatient')
+        vim.g.impatient_show_count = 1
+        vim.g.impatient_show_count_format = " %d "
+
+      end,
+    },
+    -- Cursorhold fix
+    {
+      "antoinemadec/FixCursorHold.nvim",
+      event = "BufRead",
+      config = function()
+        vim.g.cursorhold_updatetime = 100
+      end,
+    },
     -- gruvbox theme
     { "morhetz/gruvbox" },
+    { "sainnhe/gruvbox-material" },
+    { "dracula/vim" },
+    -- Molokai theme
+    { "tomasr/molokai" },
     -- vimspector
     { "puremourning/vimspector" },
 
@@ -238,6 +259,14 @@ if packer_status_ok then
         require("configs.aerial").config()
       end,
     },
+    -- Neovim UI Enhancer
+    {
+      "stevearc/dressing.nvim",
+      event = "BufWinEnter",
+      config = function()
+        require("configs.dressing").config()
+      end,
+    },
 
     { "sar/cmp-lsp.nvim" },
 
@@ -256,6 +285,14 @@ if packer_status_ok then
       end,
     },
 
+    -- LSP symbols
+    {
+      "simrat39/symbols-outline.nvim",
+      cmd = "SymbolsOutline",
+      setup = function()
+        require("configs.symbols-outline").setup()
+      end,
+    },
 
     {
       "hrsh7th/cmp-nvim-lsp",
@@ -330,6 +367,14 @@ if packer_status_ok then
       event = { "BufRead", "BufNewFile" },
       config = function()
         require("configs.colorizer").config()
+      end,
+    },
+    -- Smarter Splits
+    {
+      "mrjones2014/smart-splits.nvim",
+      module = "smart-splits",
+      config = function()
+        require("configs.smart-splits").config()
       end,
     },
   }

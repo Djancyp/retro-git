@@ -55,46 +55,28 @@ if utils.is_available "alpha-nvim" then
 end
 augroup("dashboard_settings", {})
 
-    cmd("FileType", {
-      desc = "Disable tabline for dashboard",
-      group = "dashboard_settings",
-      pattern = "dashboard",
-      command = "set showtabline=0",
-    })
-    cmd("BufWinLeave", {
-      desc = "Reenable tabline when leaving dashboard",
-      group = "dashboard_settings",
-      pattern = "<buffer>",
-      command = "set showtabline=2",
-    })
-  cmd("FileType", {
-    desc = "Disable statusline for dashboard",
-    group = "dashboard_settings",
-    pattern = "dashboard",
-    command = "set laststatus=0",
-  })
-  cmd("BufWinLeave", {
-    desc = "Reenable statusline when leaving dashboard",
-    group = "dashboard_settings",
-    pattern = "<buffer>",
-    command = "set laststatus=3",
-  })
-  cmd("BufEnter", {
-    desc = "No cursorline on dashboard",
-    group = "dashboard_settings",
-    pattern = "*",
-    command = "if &ft is 'dashboard' | set nocursorline | endif",
-  })
-  cmd("BufRead", {
-    desc = "No cursorline on dashboard",
-    group = "dashboard_settings",
-    pattern = "*",
-    command = "if &ft is 'dashboard' | set nocursorline | endif",
-  })
-  cmd("InsertEnter", {
-    desc = "No cursorline on dashboard",
-    group = "dashboard_settings",
-    pattern = "*",
-    command = "if &ft is 'dashboard' | set nocursorline | endif",
-  })
+cmd("FileType", {
+  desc = "Disable tabline for dashboard",
+  group = "dashboard_settings",
+  pattern = "dashboard",
+  command = "set showtabline=0",
+})
+cmd("BufWinLeave", {
+  desc = "Reenable tabline when leaving dashboard",
+  group = "dashboard_settings",
+  pattern = "<buffer>",
+  command = "set showtabline=2",
+})
+cmd("FileType", {
+  desc = "Disable statusline for dashboard",
+  group = "dashboard_settings",
+  pattern = "dashboard",
+  command = "set laststatus=0 | IndentBlanklineDisable",
+})
+cmd("BufWinLeave", {
+  desc = "Reenable statusline when leaving dashboard",
+  group = "dashboard_settings",
+  pattern = "<buffer>",
+  command = "set laststatus=3",
+})
 create_command("ToggleHighlightURL", require("core.utils").toggle_url_match, { desc = "Toggle URL Highlights" })

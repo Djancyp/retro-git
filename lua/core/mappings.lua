@@ -14,7 +14,6 @@ vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 map("i", "<C-l>","copilot#Accept()", {expr=true, silent=true})
 -- Normal --
-if utils.is_available "smart-splits.nvim" then
   -- Better window navigation
   map("n", "<C-h>", function()
     require("smart-splits").move_cursor_left()
@@ -42,7 +41,6 @@ if utils.is_available "smart-splits.nvim" then
   map("n", "<C-Right>", function()
     require("smart-splits").resize_right()
   end, { desc = "Resize split right" })
-end
 
 -- Navigate buffers
 if utils.is_available "bufferline.nvim" then

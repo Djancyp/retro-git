@@ -32,6 +32,16 @@ function M.config()
       autotag = {
         enable = true,
       },
+      diagnostics = {
+        enable = false,
+        show_on_dirs = false,
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
     })
   end
 end
