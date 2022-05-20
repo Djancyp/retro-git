@@ -12,35 +12,35 @@ vim.g.mapleader = " "
 -- set copilot to use Ctrl-L as leader key
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
-map("i", "<C-l>","copilot#Accept()", {expr=true, silent=true})
+map("i", "<C-l>", "copilot#Accept()", { expr = true, silent = true })
 -- Normal --
-  -- Better window navigation
-  map("n", "<C-h>", function()
-    require("smart-splits").move_cursor_left()
-  end, { desc = "Move to left split" })
-  map("n", "<C-j>", function()
-    require("smart-splits").move_cursor_down()
-  end, { desc = "Move to below split" })
-  map("n", "<C-k>", function()
-    require("smart-splits").move_cursor_up()
-  end, { desc = "Move to above split" })
-  map("n", "<C-l>", function()
-    require("smart-splits").move_cursor_right()
-  end, { desc = "Move to right split" })
+-- Better window navigation
+map("n", "<C-h>", function()
+  require("smart-splits").move_cursor_left()
+end, { desc = "Move to left split" })
+map("n", "<C-j>", function()
+  require("smart-splits").move_cursor_down()
+end, { desc = "Move to below split" })
+map("n", "<C-k>", function()
+  require("smart-splits").move_cursor_up()
+end, { desc = "Move to above split" })
+map("n", "<C-l>", function()
+  require("smart-splits").move_cursor_right()
+end, { desc = "Move to right split" })
 
-  -- Resize with arrows
-  map("n", "<C-Up>", function()
-    require("smart-splits").resize_up()
-  end, { desc = "Resize split up" })
-  map("n", "<C-Down>", function()
-    require("smart-splits").resize_down()
-  end, { desc = "Resize split down" })
-  map("n", "<C-Left>", function()
-    require("smart-splits").resize_left()
-  end, { desc = "Resize split left" })
-  map("n", "<C-Right>", function()
-    require("smart-splits").resize_right()
-  end, { desc = "Resize split right" })
+-- Resize with arrows
+map("n", "<C-Up>", function()
+  require("smart-splits").resize_up()
+end, { desc = "Resize split up" })
+map("n", "<C-Down>", function()
+  require("smart-splits").resize_down()
+end, { desc = "Resize split down" })
+map("n", "<C-Left>", function()
+  require("smart-splits").resize_left()
+end, { desc = "Resize split left" })
+map("n", "<C-Right>", function()
+  require("smart-splits").resize_right()
+end, { desc = "Resize split right" })
 
 -- Navigate buffers
 if utils.is_available "bufferline.nvim" then
@@ -278,7 +278,17 @@ if utils.is_available "Comment.nvim" then
     { desc = "Toggle comment line" }
   )
 end
-
+-- Debugger
+map("n", "<F5>", ":lua require('dap').continue()<cr>", opts)
+map("n", "<F10>", ":lua require('dap').step_over()<cr>", opts)
+map("n", "<F11>", ":lua require('dap').step_into()<cr>", opts)
+map("n", "<F12>", ":lua require('dap').step_out()<cr>", opts)
+map("n", "<leader>bp", ":lua require('dap').toggle_breakpoint()<cr>", opts)
+map("n", "<leader>Bp", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", opts)
+map("n", "<leader>lp", ":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Logpoint message: '))<cr>", opts)
+map("n", "<leader>rp", ":lua require('dap').repl.open()<cr>", opts)
+map("n", "<leader>RR", ":lua require('dap').run_last()<cr>", opts)
+map("n", "<leader>XX", ":lua require('dap').terminate()<cr>", opts)
 function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], { desc = "Terminal normal mode" })
   vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], { desc = "Terminal normal mode" })
