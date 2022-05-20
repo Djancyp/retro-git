@@ -374,22 +374,34 @@ if packer_status_ok then
         require("configs.smart-splits").config()
       end,
     },
-    { "mfussenegger/nvim-dap" },
-    {
-      "rcarriga/nvim-dap-ui",
-      requires = { "nvim-dap" },
+    { "mfussenegger/nvim-dap",
       config = function()
-        require("configs.dap").ui_config()
+        require("configs.dap").config()
       end,
     },
+    -- {
+    --   "rcarriga/nvim-dap-ui",
+    --   requires = { "nvim-dap" },
+    --   config = function()
+    --     require("configs.dap").ui_config()
+    --   end,
+    -- },
     {
-      "Pocco81/DAPInstall.nvim",
+      "uelei/DAPInstall.nvim",
       config = function()
-        require("configs.dap").install_config()
+        -- require("configs.dap").install_config()
       end,
     },
-    { "nvim-telescope/telescope-dap.nvim" },
-    { "theHamsta/nvim-dap-virtual-text" }
+    { "nvim-telescope/telescope-dap.nvim",
+      config = function()
+        require('telescope').load_extension('dap')
+      end,
+    },
+    { "theHamsta/nvim-dap-virtual-text",
+      config = function()
+         require('nvim-dap-virtual-text').setup()
+      end,
+    }
   }
 
   packer.startup {
