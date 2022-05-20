@@ -32,9 +32,7 @@ function M.config()
   vim.fn.sign_define('DapBreakpointRejected', { text = 'ﰸ', texthl = 'Error', linehl = '', numhl = '' })
   vim.fn.sign_define('DapStopped', { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = '' })
   -- nvim-telescope/telescope-dap.nvim
-  require('telescope').load_extension('dap')
-  require('nvim-dap-virtual-text').setup()
-end
+ end
 
 function M.attach()
   print("attaching")
