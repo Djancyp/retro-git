@@ -59,20 +59,6 @@ if packer_status_ok then
       "p00f/nvim-ts-rainbow",
       after = "nvim-treesitter",
     },
-    -- -- Bufferline
-    {
-      "akinsho/bufferline.nvim",
-      after = "nvim-web-devicons",
-      config = function()
-        require("configs.bufferline").config()
-      end,
-    },
-    -- Parenthesis highlighting
-    {
-      "p00f/nvim-ts-rainbow",
-      after = "nvim-treesitter",
-    },
-
     -- Autoclose tags
     {
       "windwp/nvim-ts-autotag",
@@ -224,7 +210,46 @@ if packer_status_ok then
         require("configs.lualine").config()
       end,
     },
+    -- Nvim Gps
+    {
+      "SmiteshP/nvim-gps",
+      after = "nvim-treesitter",
+      config = function()
+        local status_ok, gps = pcall(require, "nvim-gps")
+        if status_ok then
+          gps.setup()
+        end
 
+      end,
+    },
+    --  Buffer Managment
+    {
+      "Djancyp/buffer-tab",
+      after = "nvim-gps",
+      config = function()
+        local ui = vim.api.nvim_list_uis()[1]
+
+        require 'buffer-tab'.setup {
+          disbaled_filetypes = { "telescope","neo-tree", "help","packer" },
+          position = 'center', -- center, corner
+          width = 60,
+          height = 10,
+          border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars)
+
+          -- Options for preview window
+          preview_position = 'center', -- center, top, bottom, left, right
+          preview = {
+            width = 70,
+            height = 40,
+            border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars)
+          },
+
+          -- the options below are ignored when position = 'center'
+          col = ui.width, -- Window appears on the right
+          row = ui.height / 2, -- Window appears in the vertical middle
+        }
+      end,
+    },
     -- Built-in LSP
     {
       "neovim/nvim-lspconfig",
@@ -399,7 +424,7 @@ if packer_status_ok then
     },
     { "theHamsta/nvim-dap-virtual-text",
       config = function()
-         require('nvim-dap-virtual-text').setup()
+        require('nvim-dap-virtual-text').setup()
       end,
     }
   }
