@@ -211,34 +211,6 @@ if packer_status_ok then
 
       end,
     },
-    --  Buffer Managment
-    {
-      "~/Documents/nvim/buffer-tab",
-      after = "nvim-gps",
-      config = function()
-        local ui = vim.api.nvim_list_uis()[1]
-
-        require 'buffer-tab'.setup {
-          disbaled_filetypes = { "telescope", "neo-tree", "help", "packer", "dashboard", "toggleterm", "terminal" },
-          position = 'center', -- center, corner
-          width = 60,
-          height = 10,
-          border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars)
-
-          -- Options for preview window
-          preview_position = 'center', -- center, top, bottom, left, right
-          preview = {
-            width = 70,
-            height = 40,
-            border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars)
-          },
-
-          -- the options below are ignored when position = 'center'
-          col = ui.width, -- Window appears on the right
-          row = ui.height / 2, -- Window appears in the vertical middle
-        }
-      end,
-    },
     -- Built-in LSP
     {
       "neovim/nvim-lspconfig",

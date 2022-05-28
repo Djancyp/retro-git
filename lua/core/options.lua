@@ -5,7 +5,7 @@ local utils = require "core.utils"
 local set = vim.opt
 local g = vim.g
 
-vim.cmd('colorscheme github_dark')
+vim.cmd('colorscheme gruvbox-material')
 vim.cmd('au BufNewFile,BufEnter *.template :setl ft=html')
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
