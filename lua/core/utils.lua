@@ -221,9 +221,7 @@ function M.label_plugins(plugins)
 end
 
 function M.defer_plugin(plugin, timeout)
-  vim.defer_fn(function()
     require("packer").loader(plugin)
-  end, timeout or 0)
 end
 
 function M.is_available(plugin)

@@ -15,6 +15,10 @@ function M.config()
         enable = true,
         enable_autocmd = false,
       },
+      spellcheck = {
+        enable = true,
+        enable_autocmd = false,
+      },
       autopairs = {
         enable = true,
       },
@@ -22,7 +26,7 @@ function M.config()
         enable = true,
       },
       indent = {
-        enable = false,
+        enable = true,
       },
       rainbow = {
         enable = true,

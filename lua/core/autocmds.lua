@@ -65,7 +65,7 @@ cmd("BufWinLeave", {
   desc = "Reenable tabline when leaving dashboard",
   group = "dashboard_settings",
   pattern = "<buffer>",
-  command = "set showtabline=2",
+  command = "set showtabline=0",
 })
 cmd("FileType", {
   desc = "Disable statusline for dashboard",

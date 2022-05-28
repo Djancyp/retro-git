@@ -54,7 +54,7 @@ else
 end
 
 -- buffer-tab
-map("n", "<S-C>", "<cmd>BuffTabOpen<CR>", { desc = "Next buffer tab" })
+map("n", "<S-C>", "<cmd>BSOpen<CR>", { desc = "Next buffer tab" })
 -- LSP
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover symbol details" })
 -- <leader>rn: legacy binding here for backwards compatibility but not in which-key (see <leader>lr)

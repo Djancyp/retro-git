@@ -22,12 +22,20 @@ if packer_status_ok then
         vim.g.cursorhold_updatetime = 100
       end,
     },
+    -- Custom Plugin dev
+    {
+      "Djancyp/outline",
+      config = function()
+        require('outline').setup()
+      end,
+    },
     -- gruvbox theme
-    { "morhetz/gruvbox" },
     { "sainnhe/gruvbox-material" },
-    { "dracula/vim" },
-    -- Molokai theme
-    { "tomasr/molokai" },
+    { "projekt0n/github-nvim-theme",
+      config = function()
+        require('github-theme').setup()
+      end,
+    },
     -- Lua functions
     { "nvim-lua/plenary.nvim" },
 
@@ -84,36 +92,18 @@ if packer_status_ok then
           },
           disable_filetype = { "TelescopePrompt", "vim" },
         })
-      end,
+      end
     },
-    -- indentline
     {
       "lukas-reineke/indent-blankline.nvim",
       config = function()
 
         vim.opt.termguicolors = true
-        -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-        -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-
         vim.opt.list = true
-        -- vim.opt.listchars:append("space:⋅")
-        -- vim.opt.listchars:append("eol:↴")
 
         require("indent_blankline").setup {
           show_end_of_line = true,
-          space_char_blankline = " ",
-          -- char_highlight_list = {
-          --   "IndentBlanklineIndent1",
-          --   "IndentBlanklineIndent2",
-          --   "IndentBlanklineIndent3",
-          --   "IndentBlanklineIndent4",
-          --   "IndentBlanklineIndent5",
-          --   "IndentBlanklineIndent6",
-          -- },
+          space_char_blankline = " "
         }
       end,
     },
@@ -126,7 +116,6 @@ if packer_status_ok then
     -- Commenting
     {
       "numToStr/Comment.nvim",
-      event = "InsertEnter",
       config = function()
         require("configs.Comment").config()
       end,
@@ -224,13 +213,13 @@ if packer_status_ok then
     },
     --  Buffer Managment
     {
-      "Djancyp/buffer-tab",
+      "~/Documents/nvim/buffer-tab",
       after = "nvim-gps",
       config = function()
         local ui = vim.api.nvim_list_uis()[1]
 
         require 'buffer-tab'.setup {
-          disbaled_filetypes = { "telescope","neo-tree", "help","packer" },
+          disbaled_filetypes = { "telescope", "neo-tree", "help", "packer", "dashboard", "toggleterm", "terminal" },
           position = 'center', -- center, corner
           width = 60,
           height = 10,
@@ -307,15 +296,6 @@ if packer_status_ok then
       end,
     },
 
-    -- LSP symbols
-    {
-      "simrat39/symbols-outline.nvim",
-      cmd = "SymbolsOutline",
-      setup = function()
-        require("configs.symbols-outline").setup()
-      end,
-    },
-
     {
       "hrsh7th/cmp-nvim-lsp",
       config = function()
@@ -330,16 +310,6 @@ if packer_status_ok then
         require("core.utils").add_user_cmp_source "luasnip"
       end,
     },
-    -- Completion engine
-    {
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      config = function()
-        require("configs.cmp").config()
-      end,
-    },
-
-
     -- Terminal
     {
       "akinsho/nvim-toggleterm.lua",
@@ -360,7 +330,6 @@ if packer_status_ok then
     -- Completion engine
     {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
       config = function()
         require("configs.cmp").config()
       end,
@@ -426,7 +395,7 @@ if packer_status_ok then
       config = function()
         require('nvim-dap-virtual-text').setup()
       end,
-    }
+    },
   }
 
   packer.startup {
