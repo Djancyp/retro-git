@@ -12,47 +12,6 @@ cmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
   callback = require("core.utils").set_url_match,
 })
 
-if utils.is_available "alpha-nvim" then
-  augroup("alpha_settings", { clear = true })
-  if utils.is_available "bufferline.nvim" then
-    cmd("FileType", {
-      desc = "Disable tabline for alpha",
-      group = "alpha_settings",
-      pattern = "alpha",
-      command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
-    })
-  end
-  cmd("FileType", {
-    desc = "Disable statusline for alpha",
-    group = "alpha_settings",
-    pattern = "alpha",
-    command = "set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3",
-  })
-  cmd("VimEnter", {
-    desc = "Start Alpha when vim is opened with no arguments",
-    group = "alpha_settings",
-    callback = function()
-      -- optimized start check from https://github.com/goolord/alpha-nvim
-      local should_skip = false
-      if vim.fn.argc() > 0 or vim.fn.line2byte "$" ~= -1 or not vim.o.modifiable then
-        should_skip = true
-      else
-        for _, arg in pairs(vim.v.argv) do
-          if arg == "-b" or arg == "-c" or vim.startswith(arg, "+") or arg == "-S" then
-            should_skip = true
-            break
-          end
-        end
-      end
-      if not should_skip then
-        local alpha_avail, alpha = pcall(require, "alpha")
-        if alpha_avail then
-          alpha.start(true)
-        end
-      end
-    end,
-  })
-end
 augroup("dashboard_settings", {})
 
 cmd("FileType", {

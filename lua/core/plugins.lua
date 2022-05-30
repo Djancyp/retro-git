@@ -14,6 +14,7 @@ if packer_status_ok then
 
       end,
     },
+    { "dstein64/vim-startuptime" },
     -- Cursorhold fix
     {
       "antoinemadec/FixCursorHold.nvim",
@@ -29,13 +30,9 @@ if packer_status_ok then
         require('outline').setup()
       end,
     },
+    { "olimorris/onedarkpro.nvim" },
     -- gruvbox theme
     { "sainnhe/gruvbox-material" },
-    { "projekt0n/github-nvim-theme",
-      config = function()
-        require('github-theme').setup()
-      end,
-    },
     -- Lua functions
     { "nvim-lua/plenary.nvim" },
 
@@ -62,12 +59,6 @@ if packer_status_ok then
         require("configs.notify").config()
       end,
     },
-    -- Parenthesis highlighting
-    {
-      "p00f/nvim-ts-rainbow",
-      after = "nvim-treesitter",
-    },
-    -- Autoclose tags
     {
       "windwp/nvim-ts-autotag",
       after = "nvim-treesitter",
@@ -197,18 +188,6 @@ if packer_status_ok then
       "nvim-lualine/lualine.nvim",
       config = function()
         require("configs.lualine").config()
-      end,
-    },
-    -- Nvim Gps
-    {
-      "SmiteshP/nvim-gps",
-      after = "nvim-treesitter",
-      config = function()
-        local status_ok, gps = pcall(require, "nvim-gps")
-        if status_ok then
-          gps.setup()
-        end
-
       end,
     },
     -- Built-in LSP
