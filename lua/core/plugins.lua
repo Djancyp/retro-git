@@ -30,7 +30,11 @@ if packer_status_ok then
         require('outline').setup()
       end,
     },
-    { "olimorris/onedarkpro.nvim" },
+    -- {"vimwiki/vimwiki"},
+    { "mattn/emmet-vim" },
+    { "tpope/vim-surround" },
+    { "jose-elias-alvarez/nvim-lsp-ts-utils" },
+    -- { "olimorris/onedarkpro.nvim" },
     -- gruvbox theme
     { "sainnhe/gruvbox-material" },
     -- Lua functions
@@ -63,7 +67,11 @@ if packer_status_ok then
       "windwp/nvim-ts-autotag",
       after = "nvim-treesitter",
       config = function()
-        require("nvim-ts-autotag").setup()
+        require("nvim-ts-autotag").setup(
+          {
+            filetypes = { "html", "xml", "vue" },
+          }
+        )
       end,
     },
     -- autopairs
@@ -93,9 +101,51 @@ if packer_status_ok then
         vim.opt.list = true
 
         require("indent_blankline").setup {
-          show_end_of_line = true,
-          space_char_blankline = " "
-        }
+          buftype_exclude = {
+            "nofile",
+            "terminal",
+            "lsp-installer",
+            "lspinfo",
+          },
+          filetype_exclude = {
+            "help",
+            "startify",
+            "aerial",
+            "alpha",
+            "dashboard",
+            "packer",
+            "neogitstatus",
+            "NvimTree",
+            "neo-tree",
+            "Trouble",
+          },
+          context_patterns = {
+            "class",
+            "return",
+            "function",
+            "method",
+            "^if",
+            "^while",
+            "jsx_element",
+            "^for",
+            "^object",
+            "^table",
+            "block",
+            "arguments",
+            "if_statement",
+            "else_clause",
+            "jsx_element",
+            "jsx_self_closing_element",
+            "try_statement",
+            "catch_clause",
+            "import_statement",
+            "operation_type",
+          },
+          show_trailing_blankline_indent = false,
+          use_treesitter = true,
+          char = "▏",
+          context_char = "▏",
+          show_current_context = true, }
       end,
     },
     -- Better buffer closing
@@ -118,7 +168,7 @@ if packer_status_ok then
     },
     -- Start screen
     {
-      "glepnir/dashboard-nvim",
+      "goolord/alpha-nvim",
       config = function()
         require("configs.dashboard").config()
       end,
@@ -177,7 +227,7 @@ if packer_status_ok then
     },
     -- Smooth scrolling
     {
-      "karb94/neoscroll.nvim",
+      "declancm/cinnamon.nvim",
       event = { "BufRead", "BufNewFile" },
       config = function()
         require("configs.neoscroll").config()
@@ -219,6 +269,12 @@ if packer_status_ok then
       end,
       config = function()
         require("configs.aerial").config()
+      end,
+    },
+    {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require("configs.lsp.null-ls").setup()
       end,
     },
     -- Neovim UI Enhancer

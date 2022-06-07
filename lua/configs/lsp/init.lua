@@ -12,7 +12,7 @@ if status_ok then
       table.insert(servers, server.name)
     end
   end
-  for _, server in ipairs(servers) do
+   for _, server in ipairs(servers) do
     local old_on_attach = lspconfig[server].on_attach
     local opts = {
       on_attach = function(client, bufnr)

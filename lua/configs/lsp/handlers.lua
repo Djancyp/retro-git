@@ -63,7 +63,7 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, { desc = "Format file with LSP" })
 
   if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
-    -- client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_formatting = false
   end
 
   local on_attach_override = require("core.utils").user_plugin_opts("lsp.on_attach", nil, false)

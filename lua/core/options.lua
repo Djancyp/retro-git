@@ -5,14 +5,13 @@ local utils = require "core.utils"
 local set = vim.opt
 local g = vim.g
 
-vim.cmd('colorscheme onedarkpro')
+vim.cmd('colorscheme gruvbox-material')
 vim.cmd('au BufNewFile,BufEnter *.template :setl ft=html')
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
 set.clipboard = "unnamedplus" -- Connection to the system clipboard
 set.mouse = "a" -- Enable mouse support
 set.signcolumn = "yes" -- Always show the sign column
-set.foldmethod = "manual" -- Create folds manually
 set.completeopt = { "menuone", "noselect" } -- Options for insert mode completion
 set.colorcolumn = "99999" -- Fix for the indentline problem
 set.backup = false -- Disable making a backup file
@@ -48,6 +47,7 @@ set.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 set.foldlevel = 99 -- Number of levels to show in the fold column
 set.foldmethod = "indent" -- Method to use for folding
 set.foldcolumn = "0" -- Column to use for folding
+set.formatoptions = "tcqr" -- Options for the formatting
 g.do_filetype_lua = 1 -- use filetype.lua
 g.did_load_filetypes = 0 -- don't use filetype.vim
 g.highlighturl_enabled = true -- highlight URLs by default

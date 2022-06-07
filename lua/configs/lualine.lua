@@ -18,6 +18,7 @@ function M.config()
   local status_ok, lualine = pcall(require, "lualine")
   if status_ok then
     --local colors = require "default_theme.colors"
+
     local conditions = {
       buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand "%:t") ~= 1
