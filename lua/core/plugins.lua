@@ -24,6 +24,7 @@ if packer_status_ok then
       end,
     },
     -- Custom Plugin dev
+    { "~/Documents/nvim/cheat-sheet" },
     {
       "Djancyp/outline",
       config = function()
@@ -31,7 +32,7 @@ if packer_status_ok then
       end,
     },
     -- {"vimwiki/vimwiki"},
-    { "mattn/emmet-vim" },
+    -- { "mattn/emmet-vim" },
     { "tpope/vim-surround" },
     { "jose-elias-alvarez/nvim-lsp-ts-utils" },
     -- { "olimorris/onedarkpro.nvim" },
@@ -233,13 +234,23 @@ if packer_status_ok then
         require("configs.neoscroll").config()
       end,
     },
+    -- -- Statusline
+    -- {
+    --   "nvim-lualine/lualine.nvim",
+    --   config = function()
+    --     require("configs.lualine").config()
+    --   end,
+    -- },
     -- Statusline
-    {
-      "nvim-lualine/lualine.nvim",
+    { "feline-nvim/feline.nvim",
+      after = "nvim-web-devicons",
       config = function()
-        require("configs.lualine").config()
+        require "configs.feline"
+        -- require('feline').setup()
+        -- require('feline').winbar.setup()
       end,
     },
+
     -- Built-in LSP
     {
       "neovim/nvim-lspconfig",
