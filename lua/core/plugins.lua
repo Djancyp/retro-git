@@ -32,7 +32,7 @@ if packer_status_ok then
       end,
     },
     -- {"vimwiki/vimwiki"},
-    -- { "mattn/emmet-vim" },
+    { "mattn/emmet-vim" },
     { "tpope/vim-surround" },
     { "jose-elias-alvarez/nvim-lsp-ts-utils" },
     -- { "olimorris/onedarkpro.nvim" },
