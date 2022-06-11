@@ -1,5 +1,5 @@
 if not pcall(require, "feline") then
-  return
+    return
 end
 
 local colors = {
@@ -33,6 +33,7 @@ local vi_mode_colors = {
   NONE = colors.yellow
 }
 
+
 local function file_osinfo()
   local os = vim.bo.fileformat:upper()
   local icon
@@ -56,7 +57,7 @@ local comps = {
   vi_mode = {
     left = {
       provider = function()
-        return '  ' .. vi_mode_utils.get_vim_mode()
+        return '  ' .. vi_mode_utils.get_vim_mode()
       end,
       hl = function()
         local val = {
@@ -70,7 +71,7 @@ local comps = {
     },
     right = {
       -- provider = '▊',
-      provider = '',
+      provider = 'ﲕ',
       hl = function()
         local val = {
           name = vi_mode_utils.get_mode_highlight_name(),
@@ -296,3 +297,4 @@ require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", 
     bufnames = {}
   }
 }
+-- require 'feline'.winbar.setup()
