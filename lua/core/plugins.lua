@@ -26,12 +26,13 @@ if packer_status_ok then
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
-            after = "nvim-treesitter",
             config = function()
-                require('symbols-winbar').setup()
+                require('symbols-winbar').setup({
+                    lsp = false
+                })
             end,
         },
-        { "~/Documents/nvim/cheat-sheet" },
+        { "Djancyp/cheat-sheet" },
         {
             "Djancyp/outline",
             config = function()
@@ -51,6 +52,12 @@ if packer_status_ok then
         -- Popup API
         { "nvim-lua/popup.nvim" },
 
+        { "NTBBloodbath/rest.nvim",
+            requires = { "nvim-lua/plenary.nvim" },
+            config = function()
+                require('configs.rest').setup()
+            end,
+        },
         --git copilot
         { "github/copilot.vim" },
         -- Git integration
