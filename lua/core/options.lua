@@ -4,8 +4,9 @@ local utils = require "core.utils"
 
 local set = vim.opt
 local g = vim.g
-
-vim.cmd('colorscheme gruvbox-material')
+vim.g.catppuccin_flavour = "frappe"
+vim.cmd('colorscheme catppuccin')
+-- vim.cmd('colorscheme nightfox')
 vim.cmd('au BufNewFile,BufEnter *.template :setl ft=html')
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
@@ -34,7 +35,7 @@ set.number = true -- Show numberline
 set.relativenumber = true -- Show relative numberline
 set.wrap = false -- Disable wrapping of lines longer than the width of window
 set.conceallevel = 0 -- Show text normally
-set.cmdheight = 1 -- Number of screen lines to use for the command line
+-- set.cmdheight = 1 -- Number of screen lines to use for the command line
 set.shiftwidth = 4 -- Number of space inserted for indentation
 set.tabstop = 4 -- Number of space in a tab
 set.scrolloff = 8 -- Number of lines to keep above and below the cursor

@@ -23,12 +23,17 @@ if packer_status_ok then
                 vim.g.cursorhold_updatetime = 100
             end,
         },
+        { "Djancyp/lsp-range-format",
+        },
+        { "catppuccin/nvim",
+            as = "catppuccin" },
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
             config = function()
                 require('symbols-winbar').setup({
-                    lsp = false
+                    lsp = false,
+                    gps = false,
                 })
             end,
         },
@@ -46,6 +51,8 @@ if packer_status_ok then
         -- { "olimorris/onedarkpro.nvim" },
         -- gruvbox theme
         { "sainnhe/gruvbox-material" },
+        -- theme
+        { "EdenEast/nightfox.nvim" },
         -- Lua functions
         { "nvim-lua/plenary.nvim" },
 
@@ -58,6 +65,42 @@ if packer_status_ok then
                 require('configs.rest').setup()
             end,
         },
+        -- { "nvim-treesitter/nvim-treesitter-context",
+        --     config = function()
+        --         require("treesitter-context").setup({
+        --             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        --             throttle = true, -- Throttles plugin updates (may improve performance)
+        --             max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        --             show_all_context = true,
+        --             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        --                 -- For all filetypes
+        --                 -- Note that setting an entry here replaces all other patterns for this entry.
+        --                 -- By setting the 'default' entry below, you can control which nodes you want to
+        --                 -- appear in the context window.
+        --                 default = {
+        --                     "function",
+        --                     "method",
+        --                     "for",
+        --                     "while",
+        --                     "if",
+        --                     "switch",
+        --                     "case",
+        --                 },
+        --
+        --                 rust = {
+        --                     "loop_expression",
+        --                     "impl_item",
+        --                 },
+        --
+        --                 typescript = {
+        --                     "class_declaration",
+        --                     "abstract_class_declaration",
+        --                     "else_clause",
+        --                 },
+        --             }
+        --         })
+        --     end,
+        -- },
         --git copilot
         { "github/copilot.vim" },
         -- Git integration
