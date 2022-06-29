@@ -1,7 +1,5 @@
 local M = {}
 
-local utils = require "core.utils"
-
 local set = vim.opt
 local g = vim.g
 vim.g.catppuccin_flavour = "frappe"
@@ -49,6 +47,7 @@ set.foldlevel = 99 -- Number of levels to show in the fold column
 set.foldmethod = "indent" -- Method to use for folding
 set.foldcolumn = "0" -- Column to use for folding
 set.formatoptions = "tcqr" -- Options for the formatting
+set.laststatus = 3
 g.do_filetype_lua = 1 -- use filetype.lua
 g.did_load_filetypes = 0 -- don't use filetype.vim
 g.highlighturl_enabled = true -- highlight URLs by default

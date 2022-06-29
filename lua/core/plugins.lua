@@ -1,10 +1,10 @@
 local packer_status_ok, packer = pcall(require, "packer")
+
 if packer_status_ok then
     local plugins = {
         -- Plugin manager
         {
-            "wbthomason/packer.nvim",
-        },
+            "wbthomason/packer.nvim", },
         {
             "lewis6991/impatient.nvim",
             config = function()
@@ -44,7 +44,7 @@ if packer_status_ok then
                 require('outline').setup()
             end,
         },
-        -- {"vimwiki/vimwiki"},
+        { "vimwiki/vimwiki" },
         { "mattn/emmet-vim" },
         { "tpope/vim-surround" },
         { "jose-elias-alvarez/nvim-lsp-ts-utils" },
@@ -65,44 +65,6 @@ if packer_status_ok then
                 require('configs.rest').setup()
             end,
         },
-        -- { "nvim-treesitter/nvim-treesitter-context",
-        --     config = function()
-        --         require("treesitter-context").setup({
-        --             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        --             throttle = true, -- Throttles plugin updates (may improve performance)
-        --             max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        --             show_all_context = true,
-        --             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-        --                 -- For all filetypes
-        --                 -- Note that setting an entry here replaces all other patterns for this entry.
-        --                 -- By setting the 'default' entry below, you can control which nodes you want to
-        --                 -- appear in the context window.
-        --                 default = {
-        --                     "function",
-        --                     "method",
-        --                     "for",
-        --                     "while",
-        --                     "if",
-        --                     "switch",
-        --                     "case",
-        --                 },
-        --
-        --                 rust = {
-        --                     "loop_expression",
-        --                     "impl_item",
-        --                 },
-        --
-        --                 typescript = {
-        --                     "class_declaration",
-        --                     "abstract_class_declaration",
-        --                     "else_clause",
-        --                 },
-        --             }
-        --         })
-        --     end,
-        -- },
-        --git copilot
-        { "github/copilot.vim" },
         -- Git integration
         {
             "lewis6991/gitsigns.nvim",
@@ -123,13 +85,7 @@ if packer_status_ok then
         },
         {
             "windwp/nvim-ts-autotag",
-            after = "nvim-treesitter",
             config = function()
-                require("nvim-ts-autotag").setup(
-                    {
-                        filetypes = { "html", "xml", "vue" },
-                    }
-                )
             end,
         },
         -- autopairs
@@ -291,20 +247,11 @@ if packer_status_ok then
                 require("configs.neoscroll").config()
             end,
         },
-        -- -- Statusline
-        -- {
-        --   "nvim-lualine/lualine.nvim",
-        --   config = function()
-        --     require("configs.lualine").config()
-        --   end,
-        -- },
         -- Statusline
         { "feline-nvim/feline.nvim",
             after = "nvim-web-devicons",
             config = function()
                 require "configs.feline"
-                -- require('feline').setup()
-                -- require('feline').winbar.setup()
             end,
         },
 
@@ -314,7 +261,7 @@ if packer_status_ok then
             module = "lspconfig",
             opt = true,
             setup = function()
-                require("core.utils").defer_plugin "nvim-lspconfig"
+
             end,
         },
 
@@ -368,8 +315,17 @@ if packer_status_ok then
             after = "friendly-snippets",
             config = function()
                 require("configs.luasnip").config()
+                require("luasnip.loaders.from_vscode").lazy_load()
+                require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/snippets" })
             end,
         },
+        { "~/Documents/nvim/lsp-ts",
+            after = "LuaSnip",
+            config = function()
+                require('lsp-ts').setup()
+            end
+        },
+
 
         {
             "hrsh7th/cmp-nvim-lsp",

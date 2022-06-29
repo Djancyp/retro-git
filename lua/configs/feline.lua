@@ -5,12 +5,12 @@ end
 local colors = {
     bg = '#ebdbb2',
     fg = '#abb2bf',
-    yellow = '#fabd2f',
+    yellow = '#FAD02C',
     cyan = '#56b6c2',
-    darkblue = '#ebdbb2',
-    green = '#8ec07c',
+    darkblue = '#333652',
+    green = '#FFFFFF',
     orange = '#d19a66',
-    violet = '#a9a1e1',
+    violet = '#D4F1F4',
     magenta = '#c678dd',
     blue = '#83a598',
     red = '#e86671'
@@ -27,7 +27,7 @@ local vi_mode_colors = {
     ENTER = colors.cyan,
     MORE = colors.cyan,
     SELECT = colors.orange,
-    COMMAND = colors.green,
+    COMMAND = colors.red,
     SHELL = colors.green,
     TERM = colors.green,
     NONE = colors.yellow
@@ -57,7 +57,7 @@ local comps = {
     vi_mode = {
         left = {
             provider = function()
-                return '  ' .. vi_mode_utils.get_vim_mode()
+                return '  ' .. vi_mode_utils.get_vim_mode()
             end,
             hl = function()
                 local val = {
@@ -210,7 +210,7 @@ local comps = {
             -- icon = '  ',
             icon = '慎',
             hl = {
-                fg = colors.yellow
+                fg = colors.darkblue
             }
         }
     },
@@ -262,7 +262,7 @@ table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
 table.insert(components.active[1], comps.vi_mode.left)
-table.insert(components.active[1], comps.file.info)
+table.insert(components.inactive[1], comps.file.info)
 table.insert(components.active[1], comps.git.branch)
 table.insert(components.active[1], comps.git.add)
 table.insert(components.active[1], comps.git.change)
@@ -275,15 +275,28 @@ table.insert(components.active[3], comps.diagnos.hint)
 table.insert(components.active[3], comps.diagnos.info)
 table.insert(components.active[3], comps.spacer)
 table.insert(components.active[3], comps.lsp.name)
-table.insert(components.active[3], comps.file.os)
+table.insert(components.inactive[3], comps.file.os)
 table.insert(components.active[3], comps.file.position)
 table.insert(components.active[3], comps.line_percentage)
-table.insert(components.active[3], comps.scroll_bar)
-table.insert(components.active[3], comps.vi_mode.right)
+table.insert(components.inactive[3], comps.scroll_bar)
 
 
 require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", "^dashboard$", "^Outline$", "^aerial$", "packer", "alpha", "toggleterm" } },
     components = components,
+    theme = {
+        bg = '#4C5270',
+        black = '#1B1B1B',
+        skyblue = '#50B0F0',
+        cyan = '#009090',
+        fg = '#D0D0D0',
+        green = '#60A040',
+        oceanblue = '#0066cc',
+        magenta = '#C26BDB',
+        orange = '#FF9000',
+        red = '#D10000',
+        violet = '#9E93E8',
+        white = '#FFFFFF',
+        yellow = '#E1E120', },
     vi_mode_colors = vi_mode_colors,
     default_fg = colors.fg,
     default_bg = colors.bg,
