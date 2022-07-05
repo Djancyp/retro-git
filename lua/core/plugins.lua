@@ -27,6 +27,11 @@ if packer_status_ok then
         },
         { "catppuccin/nvim",
             as = "catppuccin" },
+        { "Mofiqul/vscode.nvim" },
+        { "dracula/vim" },
+        {
+            "simrat39/rust-tools.nvim",
+        },
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
@@ -37,6 +42,26 @@ if packer_status_ok then
                 })
             end,
         },
+        -- {
+        --     "xiyaowong/nvim-transparent",
+        --     config = function()
+        --         require("transparent").setup({
+        --             enable = true, -- boolean: enable transparent
+        --             extra_groups = { -- table/string: additional groups that should be cleared
+        --                 -- In particular, when you set it to 'all', that means all available groups
+        --
+        --                 -- example of akinsho/nvim-bufferline.lua
+        --                 "BufferLineTabClose",
+        --                 "BufferlineBufferSelected",
+        --                 "BufferLineFill",
+        --                 "BufferLineBackground",
+        --                 "BufferLineSeparator",
+        --                 "BufferLineIndicatorSelected",
+        --             },
+        --             exclude = {}, -- table: groups you don't want to clear
+        --         })
+        --     end
+        -- },
         { "Djancyp/cheat-sheet" },
         {
             "Djancyp/outline",
@@ -319,12 +344,12 @@ if packer_status_ok then
                 require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/snippets" })
             end,
         },
-        { "~/Documents/nvim/lsp-ts",
-            after = "LuaSnip",
-            config = function()
-                require('lsp-ts').setup()
-            end
-        },
+        -- { "~/Documents/nvim/lsp-ts",
+        --     after = "LuaSnip",
+        --     config = function()
+        --         require('lsp-ts').setup()
+        --     end
+        -- },
 
 
         {
@@ -404,13 +429,13 @@ if packer_status_ok then
                 require("configs.dap").config()
             end,
         },
-        -- {
-        --   "rcarriga/nvim-dap-ui",
-        --   requires = { "nvim-dap" },
-        --   config = function()
-        --     require("configs.dap").ui_config()
-        --   end,
-        -- },
+        {
+            "rcarriga/nvim-dap-ui",
+            requires = { "nvim-dap" },
+            config = function()
+                require("dapui").setup()
+            end,
+        },
         {
             "uelei/DAPInstall.nvim",
             config = function()

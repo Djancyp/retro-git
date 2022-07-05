@@ -114,6 +114,7 @@ if not utils.is_available "which-key.nvim" then
     map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
     map("n", "gj", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
     map("n", "gx", utils.url_opener_cmd(), { desc = "Open the file under cursor with system app" })
+    map("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Open the file under cursor with system app" })
 
     -- NeoTree
     if utils.is_available "neo-tree.nvim" then
@@ -122,12 +123,9 @@ if not utils.is_available "which-key.nvim" then
     end
 
     -- Dashboard
-    if utils.is_available "dashboard-nvim" then
-        -- map("n", "<leader>d", "<cmd>Dashboard<CR>", { desc = "Dashboard" })
-        map("n", "<leader>fn", "<cmd>DashboardNewFile<CR>", { desc = "New File" })
-        map("n", "<leader>Sl", "<cmd>SessionLoad<CR>", { desc = "Load session" })
-        map("n", "<leader>Ss", "<cmd>SessionSave<CR>", { desc = "Save session" })
-    end
+    map("n", "<leader>fn", "<cmd>ver new<CR>", { desc = "New File" })
+    map("n", "<leader>Sl", "<cmd>SessionLoad<CR>", { desc = "Load session" })
+    map("n", "<leader>Ss", "<cmd>SessionSave<CR>", { desc = "Save session" })
 
     -- GitSigns
     if utils.is_available "gitsigns.nvim" then

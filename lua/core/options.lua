@@ -3,7 +3,7 @@ local M = {}
 local set = vim.opt
 local g = vim.g
 vim.g.catppuccin_flavour = "frappe"
-vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme vscode')
 -- vim.cmd('colorscheme nightfox')
 vim.cmd('au BufNewFile,BufEnter *.template :setl ft=html')
 set.fileencoding = "utf-8" -- File content encoding for the buffer

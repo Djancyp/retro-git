@@ -9,14 +9,86 @@ function M.config()
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
         -- -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
         local lspconfig = require('lspconfig')
-        local servers = { 'sumneko_lua', 'cssls', 'tailwindcss', 'tsserver', 'vuels', 'html', 'volar', 'bashls' }
+        local servers = { 'sumneko_lua', 'cssls', 'tailwindcss', 'tsserver', 'vuels', 'html', 'volar', 'bashls', 'rust_analyzer' }
         for _, lsp in ipairs(servers) do
+            if lsp == "rust_analyzer" then
+                -- local rust_opts = require "user.lsp.settings.rust"
+                local rust_opts = {
+                    tools = {
+                        on_initialized = function()
+                            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+                                pattern = { "*.rs" },
+                                callback = function()
+                                    vim.lsp.codelens.refresh()
+                                end,
+                            })
+                        end,
+                        inlay_hints = {
+                            parameter_hints_prefix = " ",
+                            other_hints_prefix = " ",
+                        },
+                    },
+
+                    dap = {
+                        adapter = {
+                            type = "executable",
+                            command = "lldb-vscode-13",
+                            name = "rt_lldb",
+                        },
+                    },
+                    hover_actions = {
+                        -- the border that is used for the hover window
+                        -- see vim.api.nvim_open_win()
+                        border = {
+                            { "╭", "FloatBorder" },
+                            { "─", "FloatBorder" },
+                            { "╮", "FloatBorder" },
+                            { "│", "FloatBorder" },
+                            { "╯", "FloatBorder" },
+                            { "─", "FloatBorder" },
+                            { "╰", "FloatBorder" },
+                            { "│", "FloatBorder" },
+                        },
+
+                        -- whether the hover action window gets automatically focused
+                        -- default: false
+                        auto_focus = false,
+                    },
+
+                    server = {
+                        on_attach = require("configs.lsp.handlers").on_attach,
+                        capabilities = require("configs.lsp.handlers").capabilities,
+
+                        settings = {
+                            ["rust-analyzer"] = {
+                                lens = {
+                                    enable = true,
+                                },
+                                checkOnSave = {
+                                    command = "clippy",
+                                },
+                            },
+                        },
+                    },
+
+                }
+                --
+                local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
+                if not rust_tools_status_ok then
+                    return
+                end
+                --
+                rust_tools.setup(rust_opts)
+                goto continue
+            end
             lspconfig[lsp].setup {
                 -- on_attach = my_custom_on_attach,
                 capabilities = capabilities,
+                -- vim.lsp.codelens.refresh()
             }
-        end
 
+            ::continue::
+        end
         local kind_icons = {
             Class = " ",
             Color = " ",

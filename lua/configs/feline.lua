@@ -15,9 +15,18 @@ local colors = {
     blue = '#83a598',
     red = '#e86671'
 }
+colors.bg = "#262626"
+colors.bg2 = "#373737"
+colors.fg = "#ffffff"
+colors.red = "#f44747"
+colors.green = "#4EC9B0"
+colors.blue = "#0a7aca"
+colors.lightblue = "#5CB6F8"
+colors.yellow = "#ffaf00"
+colors.pink = "#DDB6F2"
 
 local vi_mode_colors = {
-    NORMAL = colors.green,
+    NORMAL = colors.blue,
     INSERT = colors.red,
     VISUAL = colors.magenta,
     OP = colors.green,
@@ -55,21 +64,23 @@ local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local comps = {
     vi_mode = {
-        left = {
+        right = {
             provider = function()
-                return '  ' .. vi_mode_utils.get_vim_mode()
+                return ' ' .. vi_mode_utils.get_vim_mode() .. ' '
             end,
             hl = function()
                 local val = {
                     name = vi_mode_utils.get_mode_highlight_name(),
-                    fg = vi_mode_utils.get_mode_color(),
+                    fg = "#ffffff",
+                    bg = vi_mode_utils.get_mode_color(),
+                    style = "bold"
                     -- fg = colors.bg
                 }
                 return val
             end,
             right_sep = ' '
         },
-        right = {
+        left = {
             -- provider = '▊',
             provider = 'ﲕ',
             hl = function()
@@ -102,6 +113,7 @@ local comps = {
                 }
             },
             hl = {
+                bg = colors.bg,
                 fg = colors.blue,
                 style = 'bold'
             }
@@ -145,7 +157,7 @@ local comps = {
         provider = 'line_percentage',
         left_sep = ' ',
         hl = {
-            style = 'bold'
+            style = 'bold',
         }
     },
     scroll_bar = {
@@ -153,6 +165,7 @@ local comps = {
         left_sep = ' ',
         hl = {
             fg = colors.blue,
+            bg = colors.bg,
             style = 'bold'
         }
     },
@@ -210,7 +223,8 @@ local comps = {
             -- icon = '  ',
             icon = '慎',
             hl = {
-                fg = colors.darkblue
+                fg = colors.white,
+                style = "bold"
             }
         }
     },
@@ -222,7 +236,7 @@ local comps = {
             left_sep = ' ',
             hl = {
                 fg = colors.violet,
-                style = 'bold'
+                style = 'bold',
             },
         },
         add = {
@@ -261,30 +275,29 @@ table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
-table.insert(components.active[1], comps.vi_mode.left)
+table.insert(components.active[1], comps.vi_mode.right)
 table.insert(components.inactive[1], comps.file.info)
 table.insert(components.active[1], comps.git.branch)
 table.insert(components.active[1], comps.git.add)
 table.insert(components.active[1], comps.git.change)
 table.insert(components.active[1], comps.git.remove)
-table.insert(components.inactive[1], comps.vi_mode.left)
-table.insert(components.inactive[1], comps.file.info)
 table.insert(components.active[3], comps.diagnos.err)
 table.insert(components.active[3], comps.diagnos.warn)
 table.insert(components.active[3], comps.diagnos.hint)
 table.insert(components.active[3], comps.diagnos.info)
 table.insert(components.active[3], comps.spacer)
 table.insert(components.active[3], comps.lsp.name)
-table.insert(components.inactive[3], comps.file.os)
+-- table.insert(components.active[3], comps.file.os)
 table.insert(components.active[3], comps.file.position)
 table.insert(components.active[3], comps.line_percentage)
-table.insert(components.inactive[3], comps.scroll_bar)
+table.insert(components.active[3], comps.scroll_bar)
+-- table.insert(components.active[1], comps.vi_mode.left)
 
 
 require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", "^dashboard$", "^Outline$", "^aerial$", "packer", "alpha", "toggleterm" } },
     components = components,
     theme = {
-        bg = '#4C5270',
+        bg = colors.bg2,
         black = '#1B1B1B',
         skyblue = '#50B0F0',
         cyan = '#009090',
@@ -298,8 +311,6 @@ require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", 
         white = '#FFFFFF',
         yellow = '#E1E120', },
     vi_mode_colors = vi_mode_colors,
-    default_fg = colors.fg,
-    default_bg = colors.bg,
     force_inactive = {
         filetypes = {
             'packer',
