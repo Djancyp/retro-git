@@ -1,7 +1,6 @@
 local M = {}
 
 local utils = require "core.utils"
-
 local status_ok, which_key = pcall(require, "which-key")
 if status_ok then
     local mappings = {
@@ -31,6 +30,13 @@ if status_ok then
                     r = { vim.lsp.buf.rename, "Rename" },
                     h = { vim.lsp.buf.hover, "Hover" }
                 },
+                h = {
+                    name = "Harpon",
+                    a = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Mark buffer" },
+                    t = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "toggle harpon" },
+                    n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "next buffer" },
+                    p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "next buffer" },
+                }
             },
             g = {
                 d = { vim.lsp.buf.definition, "Go to definition" },
@@ -66,18 +72,6 @@ if status_ok then
             mappings[mode][prefix][idx] = { name = extra_sections[idx] }
         end
     end
-
-    -- init_table("n", "<leader>", "D")
-    -- mappings.n["<leader>"].D.k = { "<cmd>VimspectorReset<CR>", "Debugger Reset" }
-    -- mappings.n["<leader>"].D.s = { "<cmd>call vimspector#Launch()<CR>", "Debugger Start" }
-    -- mappings.n["<leader>"].D.c = { "<cmd>call vimspector#Continue()<CR>", "Debugger Continue" }
-    -- mappings.n["<leader>"].D.t = { "<cmd>call vimspector#ToggleBreakpoint()<CR>", "Toggle Breakpoints" }
-    -- mappings.n["<leader>"].D.T = { "<cmd>call vimspector#ClearBreakpoints()<CR>", "Clear Breakpoints" }
-    -- mappings.n["<leader>"].D.r = { "<cmd>call vimspector#Reset()<CR>", "Reset" }
-    -- mappings.n["<leader>"].D.h = { "<cmd>VimspectorStepOut<CR>", "Step Out" }
-    -- mappings.n["<leader>"].D.l = { "<cmd>VimspectorStepInto<CR>", "Step In" }
-    -- mappings.n["<leader>"].D.j = { "<cmd>VimspectorStepOver<CR>", "Step Over" }
-
 
     mappings.n["<leader>"].e = { "<cmd>Neotree toggle<CR>", "Toggle Explorer" }
     mappings.n["<leader>"].o = { "<cmd>Neotree focus<CR>", "Focus Explorer" }

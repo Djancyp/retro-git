@@ -9,7 +9,7 @@ local colors = {
     cyan = '#56b6c2',
     darkblue = '#333652',
     green = '#FFFFFF',
-    orange = '#d19a66',
+    orange = '#ED885C',
     violet = '#D4F1F4',
     magenta = '#c678dd',
     blue = '#83a598',
@@ -22,7 +22,7 @@ colors.red = "#f44747"
 colors.green = "#4EC9B0"
 colors.blue = "#0a7aca"
 colors.lightblue = "#5CB6F8"
-colors.yellow = "#ffaf00"
+-- colors.yellow = "#ffaf00"
 colors.pink = "#DDB6F2"
 
 local vi_mode_colors = {
@@ -64,7 +64,7 @@ local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local comps = {
     vi_mode = {
-        right = {
+        left = {
             provider = function()
                 return ' ' .. vi_mode_utils.get_vim_mode() .. ' '
             end,
@@ -80,9 +80,8 @@ local comps = {
             end,
             right_sep = ' '
         },
-        left = {
-            -- provider = '▊',
-            provider = 'ﲕ',
+        right = {
+            provider = '▊',
             hl = function()
                 local val = {
                     name = vi_mode_utils.get_mode_highlight_name(),
@@ -90,8 +89,6 @@ local comps = {
                 }
                 return val
             end,
-            left_sep = ' ',
-            right_sep = ' '
         }
     },
     file = {
@@ -146,13 +143,6 @@ local comps = {
             }
         },
     },
-    left_end = {
-        provider = function() return '' end,
-        hl = {
-            fg = colors.bg,
-            bg = colors.blue,
-        }
-    },
     line_percentage = {
         provider = 'line_percentage',
         left_sep = ' ',
@@ -164,7 +154,7 @@ local comps = {
         provider = 'scroll_bar',
         left_sep = ' ',
         hl = {
-            fg = colors.blue,
+            fg = colors.green,
             bg = colors.bg,
             style = 'bold'
         }
@@ -172,44 +162,24 @@ local comps = {
     diagnos = {
         err = {
             provider = 'diagnostic_errors',
-            -- provider = function()
-            --   return '' .. lsp_get_diag("Error")
-            -- end,
-            -- -- left_sep = ' ',
-            -- enabled = function() return lsp.diagnostics_exist('Error') end,
             hl = {
                 fg = colors.red
             }
         },
         warn = {
             provider = 'diagnostic_warnings',
-            -- provider = function()
-            --     return '' ..  lsp_get_diag("Warning")
-            -- end,
-            -- -- left_sep = ' ',
-            -- enabled = function() return lsp.diagnostics_exist('Warning') end,
             hl = {
                 fg = colors.yellow
             }
         },
         info = {
             provider = 'diagnostic_info',
-            -- provider = function()
-            --     return '' .. lsp_get_diag("Information")
-            -- end,
-            -- -- left_sep = ' ',
-            -- enabled = function() return lsp.diagnostics_exist('Information') end,
             hl = {
                 fg = colors.blue
             }
         },
         hint = {
             provider = 'diagnostic_hints',
-            -- provider = function()
-            --   return '' .. lsp_get_diag("Hint")
-            -- end,
-            -- -- left_sep = ' ',
-            -- enabled = function() return lsp.diagnostics_exist('Hint') end,
             hl = {
                 fg = colors.cyan
             }
@@ -275,7 +245,7 @@ table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
-table.insert(components.active[1], comps.vi_mode.right)
+table.insert(components.active[1], comps.vi_mode.left)
 table.insert(components.inactive[1], comps.file.info)
 table.insert(components.active[1], comps.git.branch)
 table.insert(components.active[1], comps.git.add)
@@ -291,13 +261,13 @@ table.insert(components.active[3], comps.lsp.name)
 table.insert(components.active[3], comps.file.position)
 table.insert(components.active[3], comps.line_percentage)
 table.insert(components.active[3], comps.scroll_bar)
--- table.insert(components.active[1], comps.vi_mode.left)
+table.insert(components.active[3], comps.vi_mode.right)
 
 
 require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", "^dashboard$", "^Outline$", "^aerial$", "packer", "alpha", "toggleterm" } },
     components = components,
     theme = {
-        bg = colors.bg2,
+        bg = colors.blue,
         black = '#1B1B1B',
         skyblue = '#50B0F0',
         cyan = '#009090',

@@ -15,6 +15,11 @@ if packer_status_ok then
             end,
         },
         { "dstein64/vim-startuptime" },
+        -- Lua functions
+        { "nvim-lua/plenary.nvim" },
+
+        -- Popup API
+        { "nvim-lua/popup.nvim" },
         -- Cursorhold fix
         {
             "antoinemadec/FixCursorHold.nvim",
@@ -23,15 +28,7 @@ if packer_status_ok then
                 vim.g.cursorhold_updatetime = 100
             end,
         },
-        { "Djancyp/lsp-range-format",
-        },
-        { "catppuccin/nvim",
-            as = "catppuccin" },
         { "Mofiqul/vscode.nvim" },
-        { "dracula/vim" },
-        {
-            "simrat39/rust-tools.nvim",
-        },
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
@@ -42,26 +39,6 @@ if packer_status_ok then
                 })
             end,
         },
-        -- {
-        --     "xiyaowong/nvim-transparent",
-        --     config = function()
-        --         require("transparent").setup({
-        --             enable = true, -- boolean: enable transparent
-        --             extra_groups = { -- table/string: additional groups that should be cleared
-        --                 -- In particular, when you set it to 'all', that means all available groups
-        --
-        --                 -- example of akinsho/nvim-bufferline.lua
-        --                 "BufferLineTabClose",
-        --                 "BufferlineBufferSelected",
-        --                 "BufferLineFill",
-        --                 "BufferLineBackground",
-        --                 "BufferLineSeparator",
-        --                 "BufferLineIndicatorSelected",
-        --             },
-        --             exclude = {}, -- table: groups you don't want to clear
-        --         })
-        --     end
-        -- },
         { "Djancyp/cheat-sheet" },
         {
             "Djancyp/outline",
@@ -73,17 +50,9 @@ if packer_status_ok then
         { "mattn/emmet-vim" },
         { "tpope/vim-surround" },
         { "jose-elias-alvarez/nvim-lsp-ts-utils" },
-        -- { "olimorris/onedarkpro.nvim" },
         -- gruvbox theme
-        { "sainnhe/gruvbox-material" },
-        -- theme
-        { "EdenEast/nightfox.nvim" },
-        -- Lua functions
-        { "nvim-lua/plenary.nvim" },
-
-        -- Popup API
-        { "nvim-lua/popup.nvim" },
-
+        -- { "sainnhe/gruvbox-material" },
+        { "ThePrimeagen/harpoon" },
         { "NTBBloodbath/rest.nvim",
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
@@ -282,6 +251,9 @@ if packer_status_ok then
 
         -- Built-in LSP
         {
+            "simrat39/rust-tools.nvim",
+        },
+        {
             "neovim/nvim-lspconfig",
             module = "lspconfig",
             opt = true,
@@ -301,16 +273,16 @@ if packer_status_ok then
         },
 
         -- LSP symbols
-        {
-            "stevearc/aerial.nvim",
-            opt = true,
-            setup = function()
-                require("core.utils").defer_plugin "aerial.nvim"
-            end,
-            config = function()
-                require("configs.aerial").config()
-            end,
-        },
+        -- {
+        --     "stevearc/aerial.nvim",
+        --     opt = true,
+        --     setup = function()
+        --         require("core.utils").defer_plugin "aerial.nvim"
+        --     end,
+        --     config = function()
+        --         require("configs.aerial").config()
+        --     end,
+        -- },
         {
             "jose-elias-alvarez/null-ls.nvim",
             config = function()
@@ -326,7 +298,7 @@ if packer_status_ok then
             end,
         },
 
-        { "sar/cmp-lsp.nvim" },
+        -- { "sar/cmp-lsp.nvim" },
 
         -- Snippet collection
         {
@@ -355,7 +327,6 @@ if packer_status_ok then
         {
             "hrsh7th/cmp-nvim-lsp",
             config = function()
-                -- require("configs.cmp-lsp").config()
             end,
         },
         -- Snippet completion source
@@ -444,7 +415,7 @@ if packer_status_ok then
         },
         { "nvim-telescope/telescope-dap.nvim",
             config = function()
-                require('telescope').load_extension('dap')
+                -- require('telescope').load_extension('dap')
             end,
         },
         { "theHamsta/nvim-dap-virtual-text",

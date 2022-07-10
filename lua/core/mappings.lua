@@ -74,6 +74,12 @@ map("n", "<C-\\>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 -- disable Ex mode:
 map("n", "Q", "<Nop>")
 
+-- Harpon keymappings.
+map("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>")
+map("n", "<leader>ht", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>")
+-- map("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>")
+-- map("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>")
+-- map("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>")
 -- Normal Leader Mappings --
 -- NOTICE: if changed, update configs/which-key-register.lua
 -- Allows easy user modifications when just overriding which-key
