@@ -3,18 +3,22 @@ local M = {}
 function M.config()
     local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
     if status_ok then
-        if #vim.api.nvim_list_uis() == 0 then
-            return
-        end
+        -- if #vim.api.nvim_list_uis() == 0 then
+        --     return
+        -- end
         treesitter.setup({
             on_config_done = nil,
-            ensure_installed = { "http", "json", },
-            sync_install = false,
+            ensure_installed = { "http", "json", "rust", "javascript", "typescript", "html", "css", "scss" },
             ignore_install = {},
+            auto_install = true,
+            matchup = {
+                enable = false, -- mandatory, false will disable the whole extension
+                -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+            },
             highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = true,
-                use_languagetree = true,
+                enable = true, -- false will disable the whole extension
+                additional_vim_regex_highlighting = false,
+                disable = { "latex" },
             },
             context_commentstring = {
                 enable = true,
@@ -30,34 +34,8 @@ function M.config()
                     json = "",
                 },
             },
-            spellcheck = {
-                enable = true,
-                enable_autocmd = false,
-            },
-            autopairs = {
-                enable = true,
-            },
-            incremental_selection = {
-                enable = true,
-            },
             indent = { enable = true, disable = { "yaml", "python" } },
-            rainbow = {
-                enable = false,
-                extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-                max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-            }, autotag = {
-                enable = true,
-            },
-            diagnostics = {
-                enable = false,
-                show_on_dirs = false,
-                icons = {
-                    hint = "",
-                    info = "",
-                    warning = "",
-                    error = "",
-                },
-            },
+            autotag = { enable = true },
             textobjects = {
                 swap = {
                     enable = false,
@@ -90,6 +68,11 @@ function M.config()
                     goto_node = "<cr>",
                     show_help = "?",
                 },
+            },
+            rainbow = {
+                enable = true,
+                extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+                max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
             },
         })
     end

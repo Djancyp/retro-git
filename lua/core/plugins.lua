@@ -28,14 +28,36 @@ if packer_status_ok then
                 vim.g.cursorhold_updatetime = 100
             end,
         },
-        { "Mofiqul/vscode.nvim" },
+        { "ellisonleao/gruvbox.nvim" },
+        { "folke/tokyonight.nvim", branch = "main" },
+        {
+            "xiyaowong/nvim-transparent",
+            config = function()
+                -- require("transparent").setup({
+                --     enable = true, -- boolean: enable transparent
+                --     extra_groups = { -- table/string: additional groups that should be cleared
+                --         -- In particular, when you set it to 'all', that means all available groups
+                --
+                --         -- example of akinsho/nvim-bufferline.lua
+                --         "BufferLineTabClose",
+                --         "BufferlineBufferSelected",
+                --         "BufferLineFill",
+                --         "BufferLineBackground",
+                --         "BufferLineSeparator",
+                --         "BufferLineIndicatorSelected",
+                --     },
+                --     exclude = {}, -- table: groups you don't want to clear
+                -- })
+            end
+        },
+        { "~/Documents/nvim-plugins/vscode.nvim" },
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
             config = function()
                 require('symbols-winbar').setup({
                     lsp = false,
-                    gps = false,
+                    gps = true,
                 })
             end,
         },
@@ -51,7 +73,7 @@ if packer_status_ok then
         { "tpope/vim-surround" },
         { "jose-elias-alvarez/nvim-lsp-ts-utils" },
         -- gruvbox theme
-        -- { "sainnhe/gruvbox-material" },
+        { "sainnhe/gruvbox-material" },
         { "ThePrimeagen/harpoon" },
         { "NTBBloodbath/rest.nvim",
             requires = { "nvim-lua/plenary.nvim" },
@@ -186,21 +208,11 @@ if packer_status_ok then
         {
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
-            event = { "BufRead", "BufNewFile" },
-            cmd = {
-                "TSInstall",
-                "TSInstallInfo",
-                "TSInstallSync",
-                "TSUninstall",
-                "TSUpdate",
-                "TSUpdateSync",
-                "TSDisableAll",
-                "TSEnableAll",
-            },
             config = function()
                 require("configs.treesitter").config()
             end,
         },
+        { "p00f/nvim-ts-rainbow" },
         -- File explorer
         {
             "nvim-neo-tree/neo-tree.nvim",
