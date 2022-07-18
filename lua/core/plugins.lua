@@ -50,7 +50,7 @@ if packer_status_ok then
                 -- })
             end
         },
-        { "~/Documents/nvim-plugins/vscode.nvim" },
+        { "Djancyp/vscode.nvim" },
         -- Custom Plugin dev
         {
             "Djancyp/symbol-winbar",
