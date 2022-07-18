@@ -76,8 +76,8 @@ function M.config()
                 colors = {
                     "#4EC9B0",
                     "#61AFEF",
-                    "#b16286",
-                    "#d79921",
+                    "#DCDCAA",
+                    "#C678DD",
                     "#689d6a",
                     "#d65d0e",
                     "#458588",

@@ -264,10 +264,11 @@ table.insert(components.active[3], comps.scroll_bar)
 table.insert(components.active[3], comps.vi_mode.right)
 
 
-require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", "^dashboard$", "^Outline$", "^aerial$", "packer", "alpha", "toggleterm" } },
+require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", "^dashboard$", "^Outline$", "^aerial$",
+    "packer", "alpha", "toggleterm" } },
     components = components,
     theme = {
-        bg = colors.blue,
+        bg = colors.bg,
         black = '#1B1B1B',
         skyblue = '#50B0F0',
         cyan = '#009090',
@@ -292,4 +293,3 @@ require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", 
         bufnames = {}
     }
 }
--- require 'feline'.winbar.setup()
