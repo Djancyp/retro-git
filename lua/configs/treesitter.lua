@@ -73,6 +73,32 @@ function M.config()
                 enable = true,
                 extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
                 max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+                colors = {
+                    "#4EC9B0",
+                    "#61AFEF",
+                    "#b16286",
+                    "#d79921",
+                    "#689d6a",
+                    "#d65d0e",
+                    "#458588",
+                },
+                -- -- Syntax colors
+                -- vscGray = '#808080',
+                -- vscViolet = '#646695',
+                -- vscBlue = '#61AFEF',
+                -- vscDarkBlue = '#223E55',
+                -- vscMediumBlue = '#18a2fe',
+                -- vscLightBlue = '#9CDCFE',
+                -- vscGreen = '#98C379',
+                -- vscBlueGreen = '#4EC9B0',
+                -- vscLightGreen = '#B5CEA8',
+                -- vscRed = '#D26771',
+                -- vscOrange = '#CE9178',
+                -- vscLightRed = '#D16969',
+                -- vscYellowOrange = '#D7BA7D',
+                -- vscYellow = '#DCDCAA',
+                -- vscPink = '#C678DD',
+
             },
         })
     end
