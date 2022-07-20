@@ -187,7 +187,19 @@ local comps = {
     },
     lsp = {
         name = {
-            provider = 'lsp_client_names',
+            provider = function()
+                local clients = vim.lsp.buf_get_clients()
+                local client_names = {}
+
+                -- add client
+                for _, client in pairs(clients) do
+                    if client.name ~= "copilot" and client.name ~= "null-ls" then
+                        table.insert(client_names, client.name)
+                    end
+                end
+                local client_names_str = table.concat(client_names, ", ")
+                return client_names_str
+            end,
             -- left_sep = ' ',
             right_sep = ' ',
             -- icon = '  ',
@@ -280,7 +292,8 @@ require 'feline'.setup { disable = { filetypes = { "^NvimTree$", "^neo%-tree$", 
         red = '#D10000',
         violet = '#9E93E8',
         white = '#FFFFFF',
-        yellow = '#E1E120', },
+        yellow = '#E1E120',
+    },
     vi_mode_colors = vi_mode_colors,
     force_inactive = {
         filetypes = {

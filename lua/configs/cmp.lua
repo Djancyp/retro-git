@@ -1,15 +1,12 @@
 local M = {}
 function M.config()
     local cmp_status_ok, cmp = pcall(require, "cmp")
-    local snip_status_ok, luasnip = pcall(require, "luasnip")
+    local luasnip = pcall(require, "luasnip")
+    local compare = require "cmp.config.compare"
     if cmp_status_ok then
-        -- Setup lspconfig.
-        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        -- -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-        local lspconfig = require('lspconfig')
-        local servers = { 'sumneko_lua', 'cssls', 'tailwindcss', 'tsserver', 'vuels', 'html', 'volar', 'bashls', 'rust_analyzer' }
+        local servers = {
+            'rust_analyzer'
+        }
         for _, lsp in ipairs(servers) do
             if lsp == "rust_analyzer" then
                 -- local rust_opts = require "user.lsp.settings.rust"
@@ -79,16 +76,10 @@ function M.config()
                 end
                 --
                 rust_tools.setup(rust_opts)
-                goto continue
-            end
-            lspconfig[lsp].setup {
-                -- on_attach = my_custom_on_attach,
-                capabilities = capabilities,
-                -- vim.lsp.codelens.refresh()
-            }
 
-            ::continue::
+            end
         end
+        vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
         local kind_icons = {
             Class = " ",
             Color = " ",
@@ -142,12 +133,17 @@ function M.config()
                     if max_width ~= 0 and #vim_item.abbr > max_width then
                         vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. "…"
                     end
-                    vim_item.kind = kind_icons[vim_item.kind]
+                    if entry.source.name == "copilot" then
+                        vim_item.kind = "[] Copilot"
+                    else
+                        vim_item.kind = kind_icons[vim_item.kind]
+                    end
                     vim_item.menu = source_names[entry.source.name]
                     vim_item.dup = duplicates[entry.source.name]
                         or 0
                     return vim_item
-                end, },
+                end,
+            },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -160,10 +156,10 @@ function M.config()
             duplicates_default = 0,
             completion = {
                 ---@usage The minimum length of a word to complete on.
-                keyword_length = 1,
+                -- keyword_length = 2,
             },
             experimental = {
-                ghost_text = true,
+                ghost_text = false,
                 native_menu = false,
             },
             window = {
@@ -171,18 +167,39 @@ function M.config()
                 documentation = cmp.config.window.bordered(),
             },
             sources = {
-                { name = "nvim_lsp" },
-                { name = "path" },
-                { name = "luasnip" },
-                { name = "cmp_tabnine" },
-                { name = "nvim_lua" },
-                { name = "buffer" },
-                { name = "calc" },
-                { name = "emoji" },
-                { name = "treesitter" },
-                { name = "crates" },
-                { name = "tmux" },
-            }, mapping = {
+                { name = "nvim_lsp", group_index = 2 },
+                { name = "copilot", group_index = 2 },
+                { name = "path", group_index = 2 },
+                { name = "luasnip", group_index = 2 },
+                { name = "cmp_tabnine", group_index = 2 },
+                { name = "nvim_lua", group_index = 2 },
+                { name = "buffer", group_index = 2 },
+                { name = "calc", group_index = 2 },
+                { name = "emoji", group_index = 2 },
+                { name = "treesitter", group_index = 2 },
+                { name = "crates", group_index = 1 },
+                { name = "tmux", group_index = 2 },
+            },
+            sorting = {
+                priority_weight = 2,
+                comparators = {
+                    require("copilot_cmp.comparators").prioritize,
+                    require("copilot_cmp.comparators").score,
+                    compare.offset,
+                    compare.exact,
+                    -- compare.scopes,
+                    compare.score,
+                    compare.recently_used,
+                    compare.locality,
+                    -- compare.kind,
+                    compare.sort_text,
+                    compare.length,
+                    compare.order,
+                    -- require("copilot_cmp.comparators").prioritize,
+                    -- require("copilot_cmp.comparators").score,
+                }
+            },
+            mapping = {
                 ["<C-k>"] = cmp.mapping.select_prev_item(),
                 ["<C-j>"] = cmp.mapping.select_next_item(),
                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),

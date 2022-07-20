@@ -4,7 +4,8 @@ if packer_status_ok then
     local plugins = {
         -- Plugin manager
         {
-            "wbthomason/packer.nvim", },
+            "wbthomason/packer.nvim",
+        },
         {
             "lewis6991/impatient.nvim",
             config = function()
@@ -17,7 +18,6 @@ if packer_status_ok then
         { "dstein64/vim-startuptime" },
         -- Lua functions
         { "nvim-lua/plenary.nvim" },
-
         -- Popup API
         { "nvim-lua/popup.nvim" },
         -- Cursorhold fix
@@ -26,6 +26,20 @@ if packer_status_ok then
             event = "BufRead",
             config = function()
                 vim.g.cursorhold_updatetime = 100
+            end,
+        },
+        -- {
+        --     "github/copilot.vim",
+        -- },
+        { "zbirenbaum/copilot-cmp",
+            module = "copilot_cmp" },
+        {
+            "zbirenbaum/copilot.lua",
+            event = { "VimEnter" },
+            config = function()
+                vim.defer_fn(function()
+                    require("copilot").setup()
+                end, 100)
             end,
         },
         { "ellisonleao/gruvbox.nvim" },
@@ -175,7 +189,8 @@ if packer_status_ok then
                     use_treesitter = true,
                     char = "▏",
                     context_char = "▏",
-                    show_current_context = true, }
+                    show_current_context = true,
+                }
             end,
         },
         -- Better buffer closing
