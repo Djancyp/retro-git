@@ -42,28 +42,6 @@ if packer_status_ok then
                 end, 100)
             end,
         },
-        { "ellisonleao/gruvbox.nvim" },
-        { "folke/tokyonight.nvim", branch = "main" },
-        {
-            "xiyaowong/nvim-transparent",
-            config = function()
-                -- require("transparent").setup({
-                --     enable = true, -- boolean: enable transparent
-                --     extra_groups = { -- table/string: additional groups that should be cleared
-                --         -- In particular, when you set it to 'all', that means all available groups
-                --
-                --         -- example of akinsho/nvim-bufferline.lua
-                --         "BufferLineTabClose",
-                --         "BufferlineBufferSelected",
-                --         "BufferLineFill",
-                --         "BufferLineBackground",
-                --         "BufferLineSeparator",
-                --         "BufferLineIndicatorSelected",
-                --     },
-                --     exclude = {}, -- table: groups you don't want to clear
-                -- })
-            end
-        },
         { "Djancyp/vscode.nvim" },
         -- Custom Plugin dev
         {
@@ -82,13 +60,16 @@ if packer_status_ok then
                 require('outline').setup()
             end,
         },
+        -- nvim note taken
         { "vimwiki/vimwiki" },
+        -- html emmet
         { "mattn/emmet-vim" },
+        -- surround nvim
         { "tpope/vim-surround" },
         { "jose-elias-alvarez/nvim-lsp-ts-utils" },
-        -- gruvbox theme
-        { "sainnhe/gruvbox-material" },
+        -- buffer managment
         { "ThePrimeagen/harpoon" },
+        -- Post get rest managment
         { "NTBBloodbath/rest.nvim",
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
@@ -290,13 +271,25 @@ if packer_status_ok then
         },
 
         -- LSP manager
-        {
-            "williamboman/nvim-lsp-installer",
-            after = "nvim-lspconfig",
+        -- {
+        --     "williamboman/nvim-lsp-installer",
+        --     after = "nvim-lspconfig",
+        --     config = function()
+        --         require("configs.nvim-lsp-installer").config()
+        --         -- require "configs.lsp"
+        --     end,
+        -- },
+        { "williamboman/mason.nvim",
             config = function()
-                require("configs.nvim-lsp-installer").config()
+                -- require("mason").setup()
                 require "configs.lsp"
             end,
+        },
+        {
+            "williamboman/mason-lspconfig.nvim",
+            config = function()
+                -- require("mason-lspconfig").setup()
+            end
         },
 
         -- LSP symbols
@@ -325,7 +318,6 @@ if packer_status_ok then
             end,
         },
 
-        -- { "sar/cmp-lsp.nvim" },
 
         -- Snippet collection
         {
@@ -343,14 +335,6 @@ if packer_status_ok then
                 require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/snippets" })
             end,
         },
-        -- { "~/Documents/nvim/lsp-ts",
-        --     after = "LuaSnip",
-        --     config = function()
-        --         require('lsp-ts').setup()
-        --     end
-        -- },
-
-
         {
             "hrsh7th/cmp-nvim-lsp",
             config = function()
@@ -429,7 +413,6 @@ if packer_status_ok then
         },
         {
             "rcarriga/nvim-dap-ui",
-            requires = { "nvim-dap" },
             config = function()
                 require("dapui").setup()
             end,
