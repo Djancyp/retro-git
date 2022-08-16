@@ -134,7 +134,7 @@ function M.config()
                         vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. "…"
                     end
                     if entry.source.name == "copilot" then
-                        vim_item.kind = "[] Copilot"
+                        vim_item.kind = ""
                     else
                         vim_item.kind = kind_icons[vim_item.kind]
                     end

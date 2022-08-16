@@ -412,6 +412,12 @@ if packer_status_ok then
             end,
         },
         {
+            "leoluz/nvim-dap-go",
+            config = function()
+                require('dap-go').setup()
+            end
+        },
+        {
             "rcarriga/nvim-dap-ui",
             config = function()
                 require("dapui").setup()

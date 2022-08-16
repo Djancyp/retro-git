@@ -1,0 +1,2 @@
+utime(/home/djan/.local/share/nvim/mason/.packages/jdtls/archive.tar.gz): No such file or directory
+2022-08-02 00:45:21 URL:https://download.eclipse.org/jdtls/milestones/1.14.0/jdt-language-server-1.14.0-202207211651.tar.gz [41335933/41335933] -> "/home/djan/.local/share/nvim/mason/.packages/jdtls/archive.tar.gz" [2]
