@@ -20,6 +20,12 @@ function M.config()
                 additional_vim_regex_highlighting = false,
                 disable = { "latex" },
             },
+            pickers = {
+                find_files = {
+                    theme = "dropdown",
+                    previewer = false,
+                },
+            },
             context_commentstring = {
                 enable = true,
                 enable_autocmd = false,
@@ -50,6 +56,11 @@ function M.config()
             textsubjects = {
                 enable = false,
                 keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
+            },
+            query_linter = {
+                enable = true,
+                use_virtual_text = true,
+                lint_events = { "BufWrite", "CursorHold" },
             },
             playground = {
                 enable = false,

@@ -34,17 +34,29 @@ if status_ok then
     }
 
     for _, server in ipairs(servers) do
-        lspconfig[server].setup({
-            capabilities = capabilities,
-        })
+        if server == "sumneko_lua" then
+            local luadev = require("lua-dev").setup()
+            lspconfig.sumneko_lua.setup(luadev)
+        else
+            lspconfig[server].setup({
+                capabilities = capabilities,
+            })
+        end
     end
 
     vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
         buffer = bufnr,
         callback = function()
-            -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-            vim.lsp.buf.format()
+            -- check if lsp has a server for buf
+            local lsp = vim.lsp.get_active_clients()
+            for _, server in ipairs(lsp) do
+                if server.server_capabilities.documentFormattingProvider then
+                    vim.lsp.buf.format()
+                    return
+                end
+            end
+
         end,
     })
 end

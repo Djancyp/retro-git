@@ -2,7 +2,6 @@ local packer_status_ok, packer = pcall(require, "packer")
 
 if packer_status_ok then
     local plugins = {
-        -- Plugin manager
         {
             "wbthomason/packer.nvim",
         },
@@ -18,6 +17,26 @@ if packer_status_ok then
         { "dstein64/vim-startuptime" },
         -- Lua functions
         { "nvim-lua/plenary.nvim" },
+        { "~/Documents/nvim-plugins/go-tools",
+            config = function()
+                require('go-tools').Setup()
+            end },
+        { "Djancyp/regex.nvim",
+            config = function()
+                require('regex-nvim').Setup()
+            end
+        },
+        {
+            "Djancyp/better-comments.nvim",
+            config = function()
+                require('better-comment').Setup()
+            end
+
+        },
+        {
+            "folke/lua-dev.nvim",
+        },
+        { "nvim-treesitter/playground" },
         -- Popup API
         { "nvim-lua/popup.nvim" },
         -- Cursorhold fix
@@ -96,7 +115,9 @@ if packer_status_ok then
         },
         {
             "windwp/nvim-ts-autotag",
+            after = "nvim-treesitter",
             config = function()
+                require('nvim-ts-autotag').setup()
             end,
         },
         -- autopairs
@@ -232,6 +253,17 @@ if packer_status_ok then
                 require("configs.telescope").config()
             end,
         },
+        --[[ { ]]
+        --[[     "~/Documents/nvim-plugins/telescope.nvim", ]]
+        --[[     requires = { ]]
+        --[[         'nvim-lua/plenary.nvim', ]]
+        --[[         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, ]]
+        --[[     }, ]]
+        --[[     config = function() ]]
+        --[[         require("configs.telescope").config() ]]
+        --[[     end, ]]
+        --[[]]
+        --[[ }, ]]
         -- Fuzzy finder syntax support
         {
             ("nvim-telescope/telescope-%s-native.nvim"):format(vim.fn.has "win32" == 1 and "fzy" or "fzf"),
@@ -270,45 +302,23 @@ if packer_status_ok then
             end,
         },
 
-        -- LSP manager
-        -- {
-        --     "williamboman/nvim-lsp-installer",
-        --     after = "nvim-lspconfig",
-        --     config = function()
-        --         require("configs.nvim-lsp-installer").config()
-        --         -- require "configs.lsp"
-        --     end,
-        -- },
         { "williamboman/mason.nvim",
             config = function()
-                -- require("mason").setup()
                 require "configs.lsp"
             end,
         },
         {
             "williamboman/mason-lspconfig.nvim",
             config = function()
-                -- require("mason-lspconfig").setup()
             end
         },
 
-        -- LSP symbols
-        -- {
-        --     "stevearc/aerial.nvim",
-        --     opt = true,
-        --     setup = function()
-        --         require("core.utils").defer_plugin "aerial.nvim"
-        --     end,
-        --     config = function()
-        --         require("configs.aerial").config()
-        --     end,
-        -- },
-        {
-            "jose-elias-alvarez/null-ls.nvim",
-            config = function()
-                require("configs.lsp.null-ls").setup()
-            end,
-        },
+        --[[ { ]]
+        --[[     "jose-elias-alvarez/null-ls.nvim", ]]
+        --[[     config = function() ]]
+        --[[         require("configs.lsp.null-ls").setup() ]]
+        --[[     end, ]]
+        --[[ }, ]]
         -- Neovim UI Enhancer
         {
             "stevearc/dressing.nvim",
@@ -443,7 +453,7 @@ if packer_status_ok then
 
     packer.startup {
         function(use)
-            -- Load plugins!
+            -- Load plugins
             for _, plugin in pairs(
                 require("core.utils").user_plugin_opts("plugins.init", require("core.utils").label_plugins(plugins))
             ) do

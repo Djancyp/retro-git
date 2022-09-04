@@ -275,6 +275,9 @@ if status_ok then
     mappings.n["<leader>"].f.f = {
         function()
             require("telescope.builtin").find_files()
+            --[[ require 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ winblend = 10 })) ]]
+            --[[ require 'telescope.builtin'.find_files(require('telescope.themes').get_cursor()) ]]
+            --[[ require 'telescope.builtin'.find_files(require('telescope.themes').get_ivy()) ]]
         end,
         "Find Files",
     }
@@ -325,7 +328,9 @@ if status_ok then
 
     mappings = require("core.utils").user_plugin_opts("which-key.register_mappings", mappings)
     -- support previous legacy notation, deprecate at some point
-    mappings.n["<leader>"] = require("core.utils").user_plugin_opts("which-key.register_n_leader", mappings.n["<leader>"])
+    mappings.n["<leader>"] = require("core.utils").user_plugin_opts("which-key.register_n_leader",
+        mappings.n["<leader>"
+        ])
     for mode, prefixes in pairs(mappings) do
         for prefix, mapping_table in pairs(prefixes) do
             which_key.register(mapping_table, {
